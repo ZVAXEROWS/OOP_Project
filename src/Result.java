@@ -6,7 +6,6 @@ import java.io.Serializable;
  */
 public class Result implements Serializable {
 
-    // momo
 
     private String studentID;
     private String examID;
