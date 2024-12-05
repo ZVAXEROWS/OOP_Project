@@ -36,7 +36,6 @@ public class Create_Exam extends Exam{
 
             AdminMakeQuestions newQuestion = new AdminMakeQuestions();
             exam.getTheQuistons().add(newQuestion);
-            System.out.println("Question added. Current count: " + theQuistons.size());
             firstQ = false;
         }
 
