@@ -5,6 +5,7 @@ public class AdminMakeQuestions extends Questions{
         return super.getTheCorrectOne();
     }
 
+
     public AdminMakeQuestions() {
         questionID++;
 
@@ -12,13 +13,28 @@ public class AdminMakeQuestions extends Questions{
         System.out.println("Enter the question title:");
         theQuestionTitle = input.nextLine();
 
+        //Question Assets
+        System.out.println("Enter 1 to Add Image, 2 For Audio, 3 for both, 4 for skip");
+
+        int caseChoose = limlits(1,4);
+        switch (caseChoose){
+            case 1 : setImagePath();
+            break;
+            case 2 : setAudioPath();
+            break;
+            case 3 : setImagePath();
+                     setAudioPath();
+            break;
+            case 4 : break;
+        }
+
         //Quistion Mark
         System.out.println("Enter the mark for the question:");
         mark = input.nextInt();
 
 
         //Num Of Options
-        System.out.println("Enter the number of options (between 2 and 6):");
+        System.out.println("Enter the number of options");
         numOfOptions=limlits(2,6);
 
         //Options

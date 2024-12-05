@@ -1,10 +1,7 @@
-import java.util.Scanner;
-
 public class Create_Exam extends Exam{
 
-
-    public Create_Exam(){
-        ++ID;
+    public Create_Exam(Exam exam){
+        ++examID;
 
         //Exam Title
         System.out.println("Set Exam "+getID()+" _ Title");
@@ -22,22 +19,29 @@ public class Create_Exam extends Exam{
         System.out.println("Set Exam "+getID()+" _ Duration In Minutes");
         int duration = input.nextInt();
         setDuration(duration);
+        input.nextLine();
 
 
-        //Exam Number Of Questions
-        System.out.println("Set Number Of Questions to Exam "+getID());
-        int numofquestions = input.nextInt();
-        setNumOfQuestions(numofquestions);
+        boolean firstQ = true;
+        while (true) {
+            if (firstQ == false) {
 
+                System.out.println("do You want to continue - done or no to end");
+                String isDone = input.nextLine().toLowerCase();
 
-        //Exam List Of Questions
-        setListOfQuestions(getNumOfQuestions());
+                if (isDone.equals("done") || isDone.equals("no")) {
+                    break;
+                }
+            }
+
+            AdminMakeQuestions newQuestion = new AdminMakeQuestions();
+            exam.getTheQuistons().add(newQuestion);
+            System.out.println("Question added. Current count: " + theQuistons.size());
+            firstQ = false;
+        }
 
 
 
     }
-
-
-
 
 }

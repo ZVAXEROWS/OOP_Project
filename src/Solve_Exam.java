@@ -1,40 +1,30 @@
+import java.util.*;
+
 public class Solve_Exam extends Exam{
 
+/*    private int studentMarks = 0;
 
+    public int getStudentMarks() {
+        return studentMarks;
+    }
+*/
 
-    public Solve_Exam(){
-// the exam will be started , work in timer
+    public Solve_Exam(ArrayList<AdminMakeQuestions> theQuistons){
 
+        // the exam will be started , work in timer
 
-        System.out.println(getTitle());
-        for(int i=0;i<getNumOfQuestions();i++)
-        {
-            System.out.println("Question "+(i+1)+" :"+ListOfQuestions[i].getTheQuestionText());
+        int totalMarks = 0;
+        StudentQuestions studentQuestions = new StudentQuestions();
 
-            for(int j=0;j<ListOfQuestions[i].getNumOfOptions();j++)
-            {
-                System.out.println((j+1)+" :"+ListOfQuestions[i].getQuestionOptions()[j]);
+        System.out.println("Number of questions: " + theQuistons.size());
 
-            }
-            System.out.println("Enter Number between 1 and "+ListOfQuestions[i].getNumOfOptions());
-
-
-            for(int k=0;k<ListOfQuestions[i].getNumOfOptions();k++)
-            {
-
-
-            }
-
-
-
-
-
+        for (Questions question : theQuistons) {
+            totalMarks += question.getMark();
+            studentQuestions.solveQestion(question);
         }
 
-
-
-
-
+        System.out.println("M3 Tmnyatna lakom BelTwfeeq Wal Nagah");
+        System.out.println("Your degree is " + studentQuestions.getStudentMarks() + " of " + totalMarks);
     }
 
 

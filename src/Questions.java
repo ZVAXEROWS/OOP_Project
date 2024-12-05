@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Questions {
 
@@ -9,6 +10,10 @@ public class Questions {
     protected int numOfOptions;
     protected String [] quistionOptions;
     protected int theCorrectOne;
+
+    protected String imagePath;
+    protected String audioPath;
+
     Scanner input = new Scanner(System.in);
 
     //Getters
@@ -36,9 +41,43 @@ public class Questions {
         return theCorrectOne;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getAudioPath() {
+        return audioPath;
+    }
+
+    //set image file path
+    public void setImagePath() {
+
+        System.out.print("Enter the path to the image file in (png or jpg): ");
+
+        imagePath = input.nextLine();
+
+        if (!new File(imagePath).exists()) {
+            System.out.println("File not found. Please try again.");
+            setImagePath();
+        }
+    }
+
+    //set image file path
+    public void setAudioPath() {
+
+        System.out.print("Enter the path to the audio file (As a \"mp3\" only): ");
+
+        audioPath = input.nextLine();
+
+        if (!new File(audioPath).exists()) {
+            System.out.println("File not found. Please try again.");
+            setAudioPath();
+        }
+    }
+
 
     //limits
-    int limlits (int firstlim, int lastlim){
+    public int limlits (int firstlim, int lastlim){
 
         int theInputnum = 0;
         boolean isValid = false;
