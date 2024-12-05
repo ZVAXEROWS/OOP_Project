@@ -8,7 +8,7 @@ public class AdminMakeQuestions extends Questions{
     public AdminMakeQuestions() {
         questionID++;
 
-        //Quistion Title
+        //Question Title
         System.out.println("Enter the question title:");
         theQuestionTitle = input.nextLine();
 
