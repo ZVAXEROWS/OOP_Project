@@ -11,8 +11,8 @@ public class Questions {
     protected String [] quistionOptions;
     protected int theCorrectOne;
 
-    protected String imagePath;
-    protected String audioPath;
+    protected static String imagePath;
+    protected static String audioPath;
 
     Scanner input = new Scanner(System.in);
 
@@ -103,3 +103,4 @@ public class Questions {
     }
 
 }
+//last

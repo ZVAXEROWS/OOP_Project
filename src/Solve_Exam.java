@@ -23,10 +23,10 @@ public class Solve_Exam extends Exam{
             studentQuestions.solveQestion(question);
         }
 
-        System.out.println("M3 Tmnyatna lakom BelTwfeeq Wal Nagah");
         System.out.println("Your degree is " + studentQuestions.getStudentMarks() + " of " + totalMarks);
     }
 
 
 
 }
+//last
