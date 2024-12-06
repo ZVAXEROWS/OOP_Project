@@ -1,25 +1,34 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Create_Exam extends Exam{
 
-    public Create_Exam(Exam exam){
+    static FileHandling fileHandling = new FileHandling("The_Exam.txt");
+
+    static Questions helper = new Questions();
+
+
+    public static void CreateExam(Exam exam) throws IOException {
         ++examID;
+        Scanner input = new Scanner(System.in);
 
         //Exam Title
-        System.out.println("Set Exam "+getID()+" _ Title");
+        System.out.println("Set Exam "+exam.getID()+" _ Title");
         String title =input.nextLine();
-        setTitle(title);
+        exam.setTitle(title);
 
 
         //Exam Category
-        System.out.println("Set Exam "+getID()+" _ Category");
+        System.out.println("Set Exam "+exam.getID()+" _ Category");
         String Category = input.nextLine();
-        setCategory(Category);
+        exam.setCategory(Category);
 
 
         //Exam Duration
-        System.out.println("Set Exam "+getID()+" _ Duration In Minutes");
-        int duration = input.nextInt();
-        setDuration(duration);
-        input.nextLine();
+        System.out.println("Set Exam "+exam.getID()+" _ Duration In Minutes");
+        int duration = helper.limits();
+        exam.setDuration(duration);
 
 
         boolean firstQ = true;
@@ -40,7 +49,11 @@ public class Create_Exam extends Exam{
         }
 
 
-//last
+
+        fileHandling.writeObject(exam.getTheQuistons());
+
+
     }
+
 
 }

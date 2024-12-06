@@ -1,4 +1,6 @@
-public class AdminMakeQuestions extends Questions{
+import java.io.*;
+
+public class AdminMakeQuestions extends Questions implements Serializable{
 
     @Override
     public int getTheCorrectOne() {
@@ -13,29 +15,15 @@ public class AdminMakeQuestions extends Questions{
         System.out.println("Enter the question title:");
         theQuestionTitle = input.nextLine();
 
-        //Question Assets
-        System.out.println("Enter 1 to Add Image, 2 For Audio, 3 for both, 4 for skip");
-
-        int caseChoose = limlits(1,4);
-        switch (caseChoose){
-            case 1 : setImagePath();
-            break;
-            case 2 : setAudioPath();
-            break;
-            case 3 : setImagePath();
-                     setAudioPath();
-            break;
-            case 4 : break;
-        }
 
         //Quistion Mark
         System.out.println("Enter the mark for the question:");
-        mark = input.nextInt();
+        mark = limits();
 
 
         //Num Of Options
         System.out.println("Enter the number of options");
-        numOfOptions=limlits(2,6);
+        numOfOptions=limits(2,6);
 
         //Options
         quistionOptions = new String[numOfOptions];
@@ -48,7 +36,7 @@ public class AdminMakeQuestions extends Questions{
 
         //Correct Choice
         System.out.println("Enter the number of the correct choice:");
-        theCorrectOne = limlits(1,numOfOptions);
+        theCorrectOne = limits(1,numOfOptions);
 
     }
 }

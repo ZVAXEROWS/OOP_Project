@@ -9,9 +9,13 @@ public class Solve_Exam extends Exam{
     }
 */
 
-    public Solve_Exam(ArrayList<AdminMakeQuestions> theQuistons){
+    static ArrayList<AdminMakeQuestions> theQuistons;
+
+
+    public static void SolveExam(){
 
         // the exam will be started , work in timer
+
 
         int totalMarks = 0;
         StudentQuestions studentQuestions = new StudentQuestions();
@@ -29,4 +33,3 @@ public class Solve_Exam extends Exam{
 
 
 }
-//last
