@@ -27,8 +27,6 @@ public class FileHandling <T> {
             fileout2.writeObject(objects);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            System.out.println("step done");
         }
     }
 

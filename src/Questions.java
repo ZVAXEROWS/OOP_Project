@@ -4,7 +4,7 @@ import java.io.*;
 public class Questions implements Serializable{
 
     // Attributes
-    protected static int questionID =0 ;
+    protected static int questionID = 0 ;
     protected int mark;
     protected String theQuestionTitle;
     protected int numOfOptions;
@@ -14,7 +14,7 @@ public class Questions implements Serializable{
     transient Scanner input = new Scanner(System.in);
 
     //Getters
-    public static int getID() {
+    public static int getquestionID() {
         return questionID;
     }
 

@@ -12,7 +12,7 @@ public class Exam implements Serializable {
     static int examID=0;
     String examTitle;
     String Category;
-    int Duration; //in minutes
+    static int Duration; //in minutes
     float Total_Marks;
 
     protected ArrayList<AdminMakeQuestions> theQuistons = new ArrayList<>();
@@ -50,8 +50,9 @@ public class Exam implements Serializable {
         return Duration;
     }
 
-    public void setDuration(int duration) {
+    public int setDuration(int duration) {
         Duration = duration;
+        return duration;
     }
 
     public float getTotal_Marks() {

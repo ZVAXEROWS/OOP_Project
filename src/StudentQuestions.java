@@ -7,13 +7,15 @@ public class StudentQuestions extends Questions {
     public int getStudentMarks() {
         return studentMarks;
     }
-
+    static int x = 1;
 
 
     public void solveQestion(Questions quistion){
 
-        System.out.println("Quistion: " + (Questions.getID()-1));
-        System.out.println(quistion.getTheQuestionTitle());
+        System.out.println("Quistion: " + x);
+        x++;
+
+        System.out.println(quistion.getTheQuestionTitle() + "\n");
 
         String[] options = quistion.getQuistionOptions();
 
