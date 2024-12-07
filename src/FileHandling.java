@@ -23,17 +23,19 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObjectList(ArrayList<T> objects) throws IOException {
+        if(objects.isEmpty())
+        {
+            boolean append = file.exists() && file.length() > 0;
+            try {
+                FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
+                ObjectOutputStream fileout2 = append?
+                new AppendableWrittenObject(fileout1)
+                :new ObjectOutputStream(fileout1);
 
-        boolean append = file.exists() && file.length() > 0;
-        try {
-            FileOutputStream fileout1 = new FileOutputStream(file, true);   // to append add true
-            ObjectOutputStream fileout2 = append?
-            new AppendableWrittenObject(fileout1)
-            :new ObjectOutputStream(fileout1);
-
-            fileout2.writeObject(objects);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+                fileout2.writeObject(objects);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -56,17 +58,10 @@ public class FileHandling <T> {
         try {
             filein1 = new FileInputStream(file);
             ObjectInputStream filein2 = new ObjectInputStream(filein1);
-            while(true)
-            {
-                try
-                {
-                    ArrayList<T> objects = (ArrayList<T>) filein2.readObject();
-                    allObjects.addAll(objects);
-                } catch (IOException e) {
-                    break;
-                }
 
-            }
+            ArrayList<T> objects = (ArrayList<T>) filein2.readObject();
+            allObjects.addAll(objects);
+
         } catch (EOFException e) {
            e.getMessage();
         } catch (IOException | ClassNotFoundException e) {
@@ -75,7 +70,6 @@ public class FileHandling <T> {
             if(file.exists() && file.isFile()){
                 filein1.close();
             }
-
         }
         return allObjects;
 
