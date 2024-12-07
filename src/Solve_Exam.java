@@ -1,20 +1,12 @@
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Solve_Exam extends Exam{
 
-/*    private int studentMarks = 0;
+    static ArrayList<AdminMakeQuestions> theQuestions;
+   // ArrayList<AdminMakeQuestions> currenExam = theQuestions;
 
-    public int getStudentMarks() {
-        return studentMarks;
-    }
-*/
-
-    static ArrayList<AdminMakeQuestions> theQuistons;
-
-
-    public static void SolveExam(){
+    public static void SolveExam(int examIndex){
 
         // the exam will be started , work in timer
         AtomicBoolean timeUp = new AtomicBoolean(false);
@@ -22,12 +14,12 @@ public class Solve_Exam extends Exam{
 
 
         // Number of seconds for the timer
-        int durationInSeconds = Duration*60;
+        int durationInSeconds = theQuestions.get(examIndex).duration*60;
 
         // Start the timer
         Thread timerThread = new Thread(() -> {
             try {
-                Thread.sleep(durationInSeconds * 1000);
+                Thread.sleep(durationInSeconds * 1000L);
                 timeUp.set(true);
                 System.out.println("\nTime's up!");
                 stopExam.set(true);
@@ -44,19 +36,19 @@ public class Solve_Exam extends Exam{
         int totalMarks = 0, y=0;
         StudentQuestions studentQuestions = new StudentQuestions();
 
-        System.out.println("Number of questions: " + theQuistons.size());
+        System.out.println("Number of questions: " + theQuestions.get(examIndex).questions.size());
 
-        for (Questions question : theQuistons) {
+        for (int i = 0; i < theQuestions.get(examIndex).questions.size(); i++) {
 
             if(timeUp.get() || stopExam.get()){
                 break;
             }
 
-            totalMarks += question.getMark();
-            studentQuestions.solveQestion(question);
+            totalMarks += theQuestions.get(examIndex).questions.get(i).getMark();
+            studentQuestions.solveQuestion(theQuestions.get(examIndex).questions.get(i));
             y++;
 
-            if (y == theQuistons.size()) {
+            if (y == theQuestions.get(examIndex).questions.size()) {
                 stopExam.set(true);
             }
 

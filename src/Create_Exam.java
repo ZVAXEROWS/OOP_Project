@@ -1,22 +1,20 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Create_Exam extends Exam{
 
-    static FileHandling fileHandling = new FileHandling("The_Exam.txt");
 
     static Questions helper = new Questions();
 
 
     public static void CreateExam(Exam exam) throws IOException {
+        AdminMakeQuestions adminQuestions;
         ++examID;
         Scanner input = new Scanner(System.in);
 
         //Exam Title
         System.out.println("Set Exam "+exam.getID()+" _ Title");
-        String title =input.nextLine();
-        exam.setTitle(title);
+        String title = input.nextLine();
 
 
         //Exam Category
@@ -30,6 +28,7 @@ public class Create_Exam extends Exam{
         int duration = helper.limits();
         exam.setDuration(duration);
 
+        adminQuestions = new AdminMakeQuestions(title, duration);
 
         boolean firstQ = true;
         while (true) {
@@ -39,19 +38,15 @@ public class Create_Exam extends Exam{
                 String isDone = input.nextLine().toLowerCase();
 
                 if (isDone.equals("done") || isDone.equals("no")) {
+                    AdminMakeQuestions.createdExam.add(adminQuestions);
                     break;
                 }
             }
 
-            AdminMakeQuestions newQuestion = new AdminMakeQuestions();
-            exam.getTheQuistons().add(newQuestion);
+
+            adminQuestions.questions.add(adminQuestions.newQuestion());
             firstQ = false;
         }
-
-
-
-        fileHandling.writeObject(exam.getTheQuistons());
-
 
     }
 

@@ -10,16 +10,16 @@ public class StudentQuestions extends Questions {
     static int x = 1;
 
 
-    public void solveQestion(Questions quistion){
+    public void solveQuestion(Questions questions){
 
-        System.out.println("Quistion: " + x);
+        System.out.println("Question: " + x);
         x++;
 
-        System.out.println(quistion.getTheQuestionTitle() + "\n");
+        System.out.println(questions.getTheQuestionTitle() + "\n");
 
-        String[] options = quistion.getQuistionOptions();
+        String[] options = questions.getQuestionOptions();
 
-        for (int i = 0; i<options.length ; i++){
+        for (int i = 0; i< options.length ; i++){
             System.out.println((i+1)+": "+options[i]);
         }
 
@@ -27,7 +27,7 @@ public class StudentQuestions extends Questions {
         Scanner input = new Scanner(System.in);
         int answer = input.nextInt();
 
-        if (answer == quistion.getTheCorrectOne()){ studentMarks += quistion.getMark(); }
+        if (answer == questions.getTheCorrectOne()){ studentMarks += questions.getMark(); }
 
     }
 }

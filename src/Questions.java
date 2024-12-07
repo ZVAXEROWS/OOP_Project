@@ -8,7 +8,7 @@ public class Questions implements Serializable{
     protected int mark;
     protected String theQuestionTitle;
     protected int numOfOptions;
-    protected String [] quistionOptions;
+    protected String [] questionOptions;
     protected int theCorrectOne;
 
     transient Scanner input = new Scanner(System.in);
@@ -30,8 +30,8 @@ public class Questions implements Serializable{
         return numOfOptions;
     }
 
-    public String[] getQuistionOptions() {
-        return quistionOptions;
+    public String[] getQuestionOptions() {
+        return questionOptions;
     }
 
     public int getTheCorrectOne() {
@@ -41,7 +41,7 @@ public class Questions implements Serializable{
 
 
     //limits methods
-        //main lim method with limits parameters
+    //main lim method with limits parameters
     public int limits (int firstlim, int lastlim){
 
         int theInputnum = 0;
@@ -67,7 +67,7 @@ public class Questions implements Serializable{
         return theInputnum;
     }
 
-        //overloaded limits method without parameters
+    //overloaded limits method without parameters
     public int limits (){
 
         int theInputnum = 0;
