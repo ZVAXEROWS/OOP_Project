@@ -1,33 +1,21 @@
-<<<<<<< Updated upstream
-public class Main {
-    public static void main(String[] args) {
-// mooo
-    }
-=======
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-//    public static void main(String[] args) {
-//
-//        Exam exam = new Exam();
-//        Create_Exam x = new Create_Exam(exam);
-//        Solve_Exam s = new Solve_Exam(exam.getTheQuistons());
-//
-//
-//    }
-
 
     static Scanner reader = new Scanner(System.in);
-    static List<Student> students = new ArrayList<>();
+    static FileHandling usersFileHandler = new FileHandling("users.txt");
+    static FileHandling fileHandling = new FileHandling("The_Exam.txt");
 
-    public static void main(String[] args) throws IOException {
-        FileHandling fileHandling = new FileHandling("users.txt");
-        fileHandling.readDataForUsers();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        Solve_Exam.theQuestions = fileHandling.readObjectList();
+
+        usersFileHandler.readDataForUsers();
+
+        System.out.println("\t\t==============================  Welcome to Login Page  ==============================\n\n");
         List<String> LoggedOnUserData = Person.Login(FileHandling.people);
 
         if(LoggedOnUserData.getLast().equals("admin"))
@@ -43,8 +31,7 @@ public class Main {
 
     }
 
-    static void adminMethods(int id, String name, String email, String password, String role)
-    {
+    static void adminMethods(int id, String name, String email, String password, String role) throws IOException {
         Admin admin = new Admin(id, name, email, password, role);
         System.out.println("[1]Create Exam");
         System.out.println("[2]View Students Results");
@@ -56,14 +43,18 @@ public class Main {
         switch (option)
         {
             case "1": admin.createExam();break;
-            case "2": admin.viewResults(students);break;
+            case "2": admin.viewResults(FileHandling.students);break;
             case "3": admin.generateReport(); break;
-            case "99": System.exit(0); break;
+            case "99":
+                fileHandling.writeObjectList(AdminMakeQuestions.createdExam);
+                usersFileHandler.saveRegisteredUsers(Student.newerCredentials);
+                System.exit(0); break;
             default:
                 System.out.println("Invalid option");
                 adminMethods(id, name, email, password, role);
         }
-       adminMethods(id, name, email, password, role);
+        System.out.println("\n\n");
+        adminMethods(id, name, email, password, role);
     }
 
     static void studentsMethods(int id, String name, String email, String password, String role) throws IOException {
@@ -84,6 +75,7 @@ public class Main {
                 System.out.println("Invalid option");
                 studentsMethods(id, name, email, password, role);
         }
+        System.out.println("\n\n");
+        studentsMethods(id, name, email, password, role);
     }
->>>>>>> Stashed changes
 }

@@ -1,18 +1,20 @@
 import java.util.*;
+import java.io.*;
 
-public class Questions {
+public class Questions implements Serializable{
 
     // Attributes
-    protected static int questionID =0 ;
+    protected static int questionID = 0 ;
     protected int mark;
     protected String theQuestionTitle;
     protected int numOfOptions;
-    protected String [] quistionOptions;
+    protected String [] questionOptions;
     protected int theCorrectOne;
-    Scanner input = new Scanner(System.in);
+
+    transient Scanner input = new Scanner(System.in);
 
     //Getters
-    public static int getID() {
+    public static int getquestionID() {
         return questionID;
     }
 
@@ -28,8 +30,8 @@ public class Questions {
         return numOfOptions;
     }
 
-    public String[] getQuistionOptions() {
-        return quistionOptions;
+    public String[] getQuestionOptions() {
+        return questionOptions;
     }
 
     public int getTheCorrectOne() {
@@ -37,8 +39,10 @@ public class Questions {
     }
 
 
-    //limits
-    int limlits (int firstlim, int lastlim){
+
+    //limits methods
+    //main lim method with limits parameters
+    public int limits (int firstlim, int lastlim){
 
         int theInputnum = 0;
         boolean isValid = false;
@@ -53,6 +57,32 @@ public class Questions {
                     isValid = true; // Valid input within the range
                 } else {
                     System.out.println("The number is out of range. Try again!");
+                }
+
+            } else {
+                System.out.println("That's not a valid integer. Try again!");
+                input.next(); // Consume invalid input
+            }
+        }
+        return theInputnum;
+    }
+
+    //overloaded limits method without parameters
+    public int limits (){
+
+        int theInputnum = 0;
+        boolean isValid = false;
+
+        while (!isValid) {
+            System.out.print("Please enter an integer between greater than 0 \n");
+            if (input.hasNextInt()) { // Check if input is an integer
+
+                theInputnum = input.nextInt();
+
+                if (theInputnum > 0) {
+                    isValid = true; // Valid input within the range
+                } else {
+                    System.out.println("The number must be greater than 0. Try again!");
                 }
 
             } else {
