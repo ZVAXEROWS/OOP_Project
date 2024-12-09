@@ -50,7 +50,7 @@ public class Main {
                 usersFileHandler.saveRegisteredUsers(Student.newerCredentials);
                 System.exit(0); break;
             default:
-                System.out.println("Invalid option");
+                System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
                 adminMethods(id, name, email, password, role);
         }
         System.out.println("\n\n");
@@ -72,7 +72,7 @@ public class Main {
             case "2": student.viewResults(); break;
             case "99": System.exit(0); break;
             default:
-                System.out.println("Invalid option");
+                System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
                 studentsMethods(id, name, email, password, role);
         }
         System.out.println("\n\n");

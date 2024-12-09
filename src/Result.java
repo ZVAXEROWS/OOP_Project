@@ -13,9 +13,8 @@ public class Result implements Serializable {
     private String grade;
     private boolean passStatus = true;
     private String status = "fail";
-    public Result() {
 
-    }
+    public Result() {}
 
     /**
      *
