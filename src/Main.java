@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Solve_Exam.theQuestions = fileHandling.readObjectList();
+       AdminMakeQuestions.createdExam = fileHandling.readObjectList();
 
         usersFileHandler.readDataForUsers();
 

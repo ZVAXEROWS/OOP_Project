@@ -14,6 +14,7 @@ public class AdminMakeQuestions extends Questions implements Serializable{
     }
 
     public AdminMakeQuestions(String title, int duration){
+        super(0,null, 0, null, 0);
         this.examTitle = title;
         this.duration = duration;
     }
@@ -45,6 +46,6 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         //Correct Choice
         System.out.println("Enter the number of the correct choice:");
         theCorrectOne = limits(1,numOfOptions);
-        return new Questions();
+        return new Questions(0,null,0,null,0);
     }
 }

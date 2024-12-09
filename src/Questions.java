@@ -13,11 +13,16 @@ public class Questions implements Serializable{
 
     transient Scanner input = new Scanner(System.in);
 
-    //Getters
-    public static int getquestionID() {
-        return questionID;
+    public Questions(int mark, String theQuestionTitle, int numOfOptions, String [] questionOptions, int theCorrectOne){
+        this.mark = mark;
+        this.theQuestionTitle = theQuestionTitle;
+        this.numOfOptions = numOfOptions;
+        this.questionOptions = questionOptions;
+        this.theCorrectOne = theCorrectOne;
+
     }
 
+    //Getters
     public int getMark() {
         return mark;
     }

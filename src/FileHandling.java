@@ -23,20 +23,14 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObjectList(ArrayList<T> objects) throws IOException {
-        if(objects.isEmpty())
-        {
-            boolean append = file.exists() && file.length() > 0;
             try {
                 FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
-                ObjectOutputStream fileout2 = append?
-                new AppendableWrittenObject(fileout1)
-                :new ObjectOutputStream(fileout1);
+                ObjectOutputStream fileout2 = new ObjectOutputStream(fileout1);
 
                 fileout2.writeObject(objects);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
 
     /**

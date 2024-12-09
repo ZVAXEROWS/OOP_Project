@@ -21,17 +21,17 @@ public class Student extends Person {
 
     public void takeExam() {
 
-        if(Solve_Exam.theQuestions.size() > 0)
+        if(!AdminMakeQuestions.createdExam.isEmpty())
         {
 
-            for (int i = 0; i < Solve_Exam.theQuestions.size(); i++)
+            for (int i = 0; i < AdminMakeQuestions.createdExam.size(); i++)
             {
-                System.out.println("[" + (i) +"]" + Solve_Exam.theQuestions.get(i).examTitle);
+                System.out.println("[" + (i) +"]" + AdminMakeQuestions.createdExam.get(i).examTitle);
             }
 
             System.out.print("Enter the number of Exam to take: ");
             int examNumber = reader.nextInt();
-            if(examNumber >= 0 && examNumber < Solve_Exam.theQuestions.size() )
+            if(examNumber >= 0 && examNumber < AdminMakeQuestions.createdExam.size() )
             {
                 Solve_Exam.SolveExam(examNumber);
             }
@@ -42,7 +42,7 @@ public class Student extends Person {
         }
         else
         {
-            System.out.println("There is no exams Available Right Now!!");
+            System.out.println("\n\nThere is no exams Available Right Now!!\n\n");
         }
     }
 
