@@ -1,38 +1,51 @@
-public class AdminMakeQuestions extends Questions{
+import java.io.*;
+import java.util.ArrayList;
+
+public class AdminMakeQuestions extends Questions implements Serializable{
+
+    static ArrayList<AdminMakeQuestions> createdExam = new ArrayList<>();
+    public String examTitle;
+    public int duration;
+    public ArrayList<Questions> questions = new ArrayList<>();
 
     @Override
     public int getTheCorrectOne() {
         return super.getTheCorrectOne();
     }
 
-    public AdminMakeQuestions() {
-        questionID++;
+    public AdminMakeQuestions(String title, int duration){
+        super(0,null, 0, null, 0);
+        this.examTitle = title;
+        this.duration = duration;
+    }
 
-        //Quistion Title
+     public Questions newQuestion() {
+        //Question Title
         System.out.println("Enter the question title:");
         theQuestionTitle = input.nextLine();
 
-        //Quistion Mark
+
+        //Question Mark
         System.out.println("Enter the mark for the question:");
-        mark = input.nextInt();
+        mark = limits();
 
 
         //Num Of Options
-        System.out.println("Enter the number of options (between 2 and 6):");
-        numOfOptions=limlits(2,6);
+        System.out.println("Enter the number of options");
+        numOfOptions=limits(2,6);
 
         //Options
-        quistionOptions = new String[numOfOptions];
+        questionOptions = new String[numOfOptions];
 
         input.nextLine();
         for (int i =0; i < numOfOptions ; i++){
             System.out.println("Enter option " + (i + 1) + ":");
-            quistionOptions[i] = input.nextLine();
+            questionOptions[i] = input.nextLine();
         }
 
         //Correct Choice
         System.out.println("Enter the number of the correct choice:");
-        theCorrectOne = limlits(1,numOfOptions);
-
+        theCorrectOne = limits(1,numOfOptions);
+        return new Questions(0,null,0,null,0);
     }
 }
