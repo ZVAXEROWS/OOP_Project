@@ -5,12 +5,14 @@ import java.util.List;
 /**
  * Handle file by store and read data
  */
+
 public class FileHandling <T> {
     File file ;
     static List<Person> people = new ArrayList<>();
     static List<Student> students = new ArrayList<>();
     private final String fileName;
     public FileHandling(String fileName){
+
 
         this.file = new File(fileName);
         this.fileName = fileName;
@@ -19,10 +21,12 @@ public class FileHandling <T> {
 
     /**
      * Store an arrayList of objects
+     *
      * @param objects An object to store
      * @throws IOException
      */
     public void writeObjectList(ArrayList<T> objects) throws IOException {
+      
             try {
                 FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
                 ObjectOutputStream fileout2 = new ObjectOutputStream(fileout1);
@@ -35,10 +39,12 @@ public class FileHandling <T> {
 
     /**
      * Fun
+     *
      * @return ArrayList of objects that stored in the file
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
     public  ArrayList<T> readObjectList() throws IOException, ClassNotFoundException {
         ArrayList<T> allObjects = new ArrayList<>();
         FileInputStream filein1 = null;
