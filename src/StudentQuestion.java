@@ -8,12 +8,12 @@ public class StudentQuestion extends Questions {
         return studentMarks;
     }
 
-    public void solveQestion(Questions quistion){
+    public void solveQuestion(Questions question){
 
-        System.out.println("Quistion: " + Questions.getID());
-        System.out.println(quistion.getTheQuestionTitle());
+        System.out.println("Question: " + Questions.getID());
+        System.out.println(question.getTheQuestionTitle());
 
-        String[] options = quistion.getQuistionOptions();
+        String[] options = question.getQuistionOptions();
 
         for (int i = 0; i<options.length ; i++){
             System.out.println((i+1)+": "+options[i]);
@@ -23,7 +23,7 @@ public class StudentQuestion extends Questions {
         Scanner input = new Scanner(System.in);
         int answer = input.nextInt();
 
-        if (answer == quistion.getTheCorrectOne()){ studentMarks += quistion.getMark(); }
+        if (answer == question.getTheCorrectOne()){ studentMarks += question.getMark(); }
 
     }
 }

@@ -8,11 +8,11 @@ public class AdminMakeQuestions extends Questions{
     public AdminMakeQuestions() {
         questionID++;
 
-        //Quistion Title
+        //Question Title
         System.out.println("Enter the question title:");
         theQuestionTitle = input.nextLine();
 
-        //Quistion Mark
+        //Question Mark
         System.out.println("Enter the mark for the question:");
         mark = input.nextInt();
 
