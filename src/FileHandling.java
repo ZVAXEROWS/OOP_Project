@@ -46,21 +46,21 @@ public class FileHandling <T> {
      */
 
     public  ArrayList<T> readObjectList() throws IOException, ClassNotFoundException {
-        ArrayList<T> allObjects = new ArrayList<>();
+        ArrayList<T> objects = new ArrayList<>();
         FileInputStream filein1 = null;
 
         if (!file.exists()||file.length() == 0) {
 
             System.out.println("No results available.");
-            return allObjects;
+            return objects;
         }
 
         try {
             filein1 = new FileInputStream(file);
             ObjectInputStream filein2 = new ObjectInputStream(filein1);
 
-            ArrayList<T> objects = (ArrayList<T>) filein2.readObject();
-            allObjects.addAll(objects);
+             objects = (ArrayList<T>) filein2.readObject();
+
 
         } catch (EOFException e) {
            e.getMessage();
@@ -71,7 +71,7 @@ public class FileHandling <T> {
                 filein1.close();
             }
         }
-        return allObjects;
+        return objects;
 
     }
 
