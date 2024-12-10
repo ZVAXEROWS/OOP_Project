@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class AdminMakeQuestions extends Questions implements Serializable{
 
     static ArrayList<AdminMakeQuestions> createdExam = new ArrayList<>();
+    protected int examID;
     public String examTitle;
     public int duration;
     public ArrayList<Questions> questions = new ArrayList<>();
@@ -13,10 +14,11 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         return super.getTheCorrectOne();
     }
 
-    public AdminMakeQuestions(String title, int duration){
+    public AdminMakeQuestions(String title, int duration, int examID){
         super(0,null, 0, null, 0);
         this.examTitle = title;
         this.duration = duration;
+        this.examID = examID;
     }
 
      public Questions newQuestion() {

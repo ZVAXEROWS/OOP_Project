@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Person{
+public class Person <T>{
     public int ID;
     public String name;
     public String role;

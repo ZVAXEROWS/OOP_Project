@@ -21,7 +21,6 @@ public class Result implements Serializable {
         this.studentID = studentID;
         this.studentName = studentName;
 
-
     }
 
 

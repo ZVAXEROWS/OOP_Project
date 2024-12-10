@@ -59,6 +59,7 @@ public class FileHandling <T> {
             objects = (ArrayList<T>) filein2.readObject();
 
 
+
         } catch (EOFException e) {
             e.getMessage();
         } catch (IOException | ClassNotFoundException e) {
@@ -77,6 +78,20 @@ public class FileHandling <T> {
      * @param object An object to store
      * @throws IOException
      */
+    public void writeObject(T object) throws IOException {
+
+
+        try
+        {
+            FileOutputStream fileOut = new FileOutputStream(file);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(object);
+            objectOut.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void writeObject(T object) throws IOException {
 
         try
@@ -117,7 +132,8 @@ public class FileHandling <T> {
     }
 
 
-     public void readDataForUsers() throws IOException {
+    public void readDataForUsers() throws IOException {
+
         BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
         try {
             String currentLine;
