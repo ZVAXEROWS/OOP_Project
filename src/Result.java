@@ -1,103 +1,75 @@
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Calculate the results of students
  */
 public class Result implements Serializable {
 
+    private final String studentName;
+    private final String studentID;
+    public List<ExamResult> examResults = new ArrayList<>();
 
-    private String studentID;
-    private String examID;
-    private int score;
-    private String grade;
-    private boolean passStatus = true;
-    private String status = "fail";
-
-    public Result() {}
 
     /**
-     *
-     * @param studentID The id of the student
-     * @param examID The exam ID
-     * @param score The student score in the exam
+     * @param studentID   The id of the student
+     * @param studentName The name of the student
      */
-    public Result(String studentID, String examID, int score) {
+    public Result(String studentID, String studentName) {
+        //, int examIndex, int examMark, int result
+
         this.studentID = studentID;
-        this.examID = examID;
-        this.score = score;
-        calculateGrade();
+        this.studentName = studentName;
+
+        //addExamResult(examIndex, examMark, result);
+
     }
 
-    // getter and setter for all private fields
+
+    public String getStudentName() {
+        return studentName;
+    }
     public String getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+
+    public void addExamResult(int examIndex, int examMark, int result) {
+
+        ExamResult examResult = new ExamResult(examIndex, examMark, result);
+
+        this.examResults.add(examResult);
+
     }
 
-    public String getExamID() {
-        return examID;
-    }
-
-    public void setExamID(String examID) {
-        this.examID = examID;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-
-    /**
-     * Calculate grade of student based on score
-     */
-    public void calculateGrade() {
-        if (score >= 90) {
-            grade = "A";
-        } else if (score >= 80) {
-            grade = "B";
-        } else if (score >= 70) {
-            grade = "C";
-        } else if (score >= 60) {
-            grade = "D";
-        } else {
-            grade = "F";
-            passStatus = false;
-        }
-    }
 
     /**
      * Display the student results
      */
     public void displayStudentResults() {
-// still need student name & exam name
 
-        if(passStatus) {
-            status = "pass";
+
+        System.out.println("Student Results");
+        System.out.println("=======================================");
+        System.out.println("Student Name: " + studentName);
+        System.out.println("Student ID: " + studentID);
+        System.out.println("---------------------------------------");
+
+        if (examResults.isEmpty()) {
+            System.out.println("|| No Exam Results!! ||");
+
+        } else {
+            for (ExamResult result : examResults) {
+
+                System.out.println("Exam Name: " + result.getExamName());
+                System.out.println("Score: " + result.getScore() + "%");
+                System.out.println("Grade: " + result.getGrade());
+                System.out.println("Status: " + result.getStatus());
+                System.out.println("---------------------------------------");
+            }
         }
-
-        System.out.println( "Results\n" +
-                "{studentId= " + studentID +
-                ", examId= " + examID +
-                ", score= " + score +
-                ", grade= " + grade +
-                ", Status= " + status +
-                '}');
+        System.out.println("=======================================");
     }
 
 }
