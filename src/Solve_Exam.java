@@ -3,8 +3,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Solve_Exam extends Exam{
 
-    public static void SolveExam(int examIndex){
-
+    public static void SolveExam(int examIndex, Result result){
         // the exam will be started , work in timer
         AtomicBoolean timeUp = new AtomicBoolean(false);
         AtomicBoolean stopExam = new AtomicBoolean(false);
@@ -53,7 +52,7 @@ public class Solve_Exam extends Exam{
         if (!timeUp.get()) {
             timerThread.interrupt();
         }
-
+        result.addExamResult(examIndex, totalMarks,  studentQuestions.getStudentMarks());
         System.out.println("Your degree is " + studentQuestions.getStudentMarks() + " of " + totalMarks);
     }
 

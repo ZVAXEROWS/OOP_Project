@@ -8,18 +8,18 @@ public class Student extends Person {
     Scanner reader = new Scanner(System.in);
     public static List<Person> newerCredentials = new ArrayList<Person>();
 
-    Solve_Exam exam = new Solve_Exam();
+    Solve_Exam exam;
     public Student(int id,String name, String email, String password, String role) throws IOException {
       super(id,name,email,password, role);
     }
 
-    @Override
-    public void viewResults() {
-        Result result = new Result();
+
+    public void viewResults(List<String> student, Result upComingResult) {
+        Result result = upComingResult;
         result.displayStudentResults();
     }
 
-    public void takeExam() {
+    public void takeExam(List<String> student, Result result) {
 
         if(!AdminMakeQuestions.createdExam.isEmpty())
         {
@@ -33,11 +33,12 @@ public class Student extends Person {
             int examNumber = reader.nextInt();
             if(examNumber >= 0 && examNumber < AdminMakeQuestions.createdExam.size() )
             {
-                Solve_Exam.SolveExam(examNumber);
+                exam = new Solve_Exam();
+                Solve_Exam.SolveExam(examNumber, result);
             }
             else
             {
-                takeExam();
+                takeExam(student, result);
             }
         }
         else

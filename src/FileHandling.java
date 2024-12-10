@@ -75,7 +75,47 @@ public class FileHandling <T> {
 
     }
 
-     public void readDataForUsers() throws IOException {
+    public void writeObject(T object) throws IOException {
+
+        try
+        {
+            FileOutputStream fileOut = new FileOutputStream(file);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(object);
+            objectOut.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Read an object from the file
+     *
+     * @return The object read from the file
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public T readObject() throws IOException, ClassNotFoundException {
+
+        if (!file.exists() || file.length() == 0) {
+            //System.out.println("No results available.");
+            return null;
+        }
+
+        try {
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            return (T) objectIn.readObject();
+        } catch (EOFException e) {
+            e.getMessage(); // Handle the end of file exception if needed
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+    public void readDataForUsers() throws IOException {
         BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
         try {
             String currentLine;
