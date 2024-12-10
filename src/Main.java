@@ -27,7 +27,7 @@ public class Main {
         else
         {
             System.out.println("\t\t==============================  Welcome to Student dashboard  ==============================\n\n");
-            studentResultHandler = new FileHandling("users/"+LoggedOnUserData.getFirst()+".txt");
+            studentResultHandler = new FileHandling("users\\"+LoggedOnUserData.getFirst()+".txt");
             Result result;
             if((result = studentResultHandler.readObject()) == null)
             {
@@ -79,6 +79,7 @@ public class Main {
             case "1": student.takeExam(LoggedOnUserData, result); break;
             case "2": student.viewResults(LoggedOnUserData, result); break;
             case "99":
+
                 studentResultHandler.writeObject(result);
                 System.exit(0);
                 break;

@@ -92,19 +92,6 @@ public class FileHandling <T> {
         }
     }
 
-    public void writeObject(T object) throws IOException {
-
-        try
-        {
-            FileOutputStream fileOut = new FileOutputStream(file);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(object);
-            objectOut.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Read an object from the file
      *
