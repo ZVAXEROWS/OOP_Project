@@ -12,8 +12,6 @@ public class FileHandling <T> {
     static List<Student> students = new ArrayList<>();
     private final String fileName;
     public FileHandling(String fileName){
-
-
         this.file = new File(fileName);
         this.fileName = fileName;
     }
@@ -44,7 +42,6 @@ public class FileHandling <T> {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-
     public  ArrayList<T> readObjectList() throws IOException, ClassNotFoundException {
         ArrayList<T> objects = new ArrayList<>();
         FileInputStream filein1 = null;
@@ -59,11 +56,12 @@ public class FileHandling <T> {
             filein1 = new FileInputStream(file);
             ObjectInputStream filein2 = new ObjectInputStream(filein1);
 
-             objects = (ArrayList<T>) filein2.readObject();
+            objects = (ArrayList<T>) filein2.readObject();
+
 
 
         } catch (EOFException e) {
-           e.getMessage();
+            e.getMessage();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }finally {
@@ -73,6 +71,25 @@ public class FileHandling <T> {
         }
         return objects;
 
+    }
+
+    /**
+     * Store an object to the file
+     * @param object An object to store
+     * @throws IOException
+     */
+    public void writeObject(T object) throws IOException {
+
+
+        try
+        {
+            FileOutputStream fileOut = new FileOutputStream(file);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(object);
+            objectOut.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void writeObject(T object) throws IOException {
@@ -116,6 +133,7 @@ public class FileHandling <T> {
 
 
     public void readDataForUsers() throws IOException {
+
         BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
         try {
             String currentLine;

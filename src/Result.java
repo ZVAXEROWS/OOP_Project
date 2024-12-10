@@ -17,12 +17,9 @@ public class Result implements Serializable {
      * @param studentName The name of the student
      */
     public Result(String studentID, String studentName) {
-        //, int examIndex, int examMark, int result
 
         this.studentID = studentID;
         this.studentName = studentName;
-
-        //addExamResult(examIndex, examMark, result);
 
     }
 
@@ -73,4 +70,3 @@ public class Result implements Serializable {
     }
 
 }
-//last
