@@ -27,7 +27,7 @@ public class Main {
         else
         {
             System.out.println("\t\t==============================  Welcome to Student dashboard  ==============================\n\n");
-            studentResultHandler = new FileHandling("users/"+LoggedOnUserData.getFirst()+".txt");
+            studentResultHandler = new FileHandling("users\\"+LoggedOnUserData.getFirst()+".txt");
             Result result;
             if((result = studentResultHandler.readObject()) == null)
             {
