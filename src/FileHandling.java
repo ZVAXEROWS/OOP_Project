@@ -8,8 +8,9 @@ import java.util.List;
 
 public class FileHandling <T> {
     File file ;
-    static List<Person> people = new ArrayList<>();
-    static List<Student> students = new ArrayList<>();
+    static public List<Person> people = new ArrayList<>();
+    static public List<Student> students = new ArrayList<>();
+    static public List<Result> studentsResultsForAdmin = new ArrayList<>();
     private final String fileName;
     public FileHandling(String fileName){
         this.file = new File(fileName);
@@ -79,8 +80,6 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObject(T object) throws IOException {
-
-
         try
         {
             FileOutputStream fileOut = new FileOutputStream(file);

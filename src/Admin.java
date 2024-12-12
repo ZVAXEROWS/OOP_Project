@@ -10,7 +10,7 @@ public class Admin extends Person {
     }
 
 
-    public void viewResults(List<Student> students)
+    public void viewResults(List<Student> students, List<Result> results)
     {
         int counter = 0;
         System.out.println("available Students:\n");
@@ -18,17 +18,17 @@ public class Admin extends Person {
         {
             System.out.println("["+ (counter++) + "] "+student.name);
         }
-        System.out.print("\nEnter the number of the users.student to view results: ");
+        System.out.print("\nEnter the number of the student to view his results: ");
         int choice = reader.nextInt();
 
         try
         {
-            students.get(choice).viewResults();
+            students.get(choice).viewResults(results.get(choice));
 
         }catch (IndexOutOfBoundsException e)
         {
             System.out.println("\nStudent not found");
-            viewResults(students);
+            viewResults(students, results);
         }
     }
 
