@@ -121,7 +121,10 @@ public class Main {
             case "1": student.takeExam(LoggedOnUserData, result); break;
             case "2": student.viewResults(result); break;
             case "99":
+
                 usersFileHandler.saveRegisteredUsers(Student.newerCredentials);
+
+
                 studentResultHandler.writeObject(result);
                 System.exit(0);
                 break;

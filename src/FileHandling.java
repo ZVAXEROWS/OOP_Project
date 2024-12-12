@@ -80,7 +80,6 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObject(T object) throws IOException {
-
         try
         {
             FileOutputStream fileOut = new FileOutputStream(file);

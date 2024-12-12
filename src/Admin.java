@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.*;
-
 public class Admin extends Person {
+
     Scanner reader = new Scanner(System.in);
 
     public Admin(int id, String name, String email, String password, String role)
