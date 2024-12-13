@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class Main {
             System.out.println("\t\t==============================  Welcome to Admin dashboard  ==============================\n\n");
             for(int i = 0; i < FileHandling.students.size(); i++)
             {
-                adminExamResultHandler = new FileHandling("users\\"+FileHandling.students.get(i).ID+".txt");
+                adminExamResultHandler = new FileHandling("users" + File.separator +FileHandling.students.get(i).ID+File.separator+FileHandling.students.get(i).ID+".txt");
                 if(adminExamResultHandler.file.exists() && adminExamResultHandler.file.length() != 0)
                 {
                     FileHandling.studentsResultsForAdmin.add(adminExamResultHandler.readObject());
@@ -41,7 +42,14 @@ public class Main {
         else
         {
             System.out.println("\t\t==============================  Welcome to Student dashboard  ==============================\n\n");
-            studentResultHandler = new FileHandling("users\\"+LoggedOnUserData.getFirst()+".txt");
+            String folderPath = "users" + File.separator + LoggedOnUserData.getFirst();
+            File folder = new File(folderPath);
+
+            if(!folder.exists())
+            {
+                folder.mkdir();
+            }
+            studentResultHandler = new FileHandling(folderPath + File.separator + LoggedOnUserData.getFirst()+".txt");
             Result result;
             if((result = studentResultHandler.readObject()) == null)
             {
@@ -56,9 +64,10 @@ public class Main {
     static public void loginOrRegister() throws IOException, ClassNotFoundException {
         System.out.println("[1] Login\n[2]Register");
         String choice = reader.nextLine();
-        switch (choice)
-        {
-            case "1": LoggedOnUserData = Person.Login(FileHandling.people); break;
+        switch (choice) {
+            case "1":
+                LoggedOnUserData = Person.Login(FileHandling.people);
+                break;
             case "2":
                 Student.register(FileHandling.people.size());
                 FileHandling.people.add(Student.newerCredentials.getLast());
@@ -67,7 +76,14 @@ public class Main {
                 LoggedOnUserData.add(Student.newerCredentials.getLast().Email);
                 LoggedOnUserData.add(Student.newerCredentials.getLast().getPassword());
                 LoggedOnUserData.add(Student.newerCredentials.getLast().role);
-                studentResultHandler = new FileHandling("users\\"+LoggedOnUserData.getFirst()+".txt");
+
+                String path = "users"+ File.separator + LoggedOnUserData.getFirst();
+                File folder = new File(path);
+                if (!folder.exists())
+                {
+                    folder.mkdir();
+                }
+                studentResultHandler = new FileHandling(path+File.separator+LoggedOnUserData.getFirst()+".txt");
                 Result result;
                 if((result = studentResultHandler.readObject()) == null)
                 {
@@ -86,7 +102,7 @@ public class Main {
         Admin admin = new Admin(id, name, email, password, role);
         System.out.println("[1]Create Exam");
         System.out.println("[2]View Students Results");
-        System.out.println("[3]Generate top performers Report");
+        System.out.println("[3]Generate Students Reports");
         System.out.println("[99]Exit Program");
         System.out.println("-----------------------------------------");
         System.out.print("Select your desired option: ");
@@ -101,7 +117,6 @@ public class Main {
                 System.exit(0); break;
             default:
                 System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
-                adminMethods(id, name, email, password, role, results);
         }
         System.out.println("\n\n");
         adminMethods(id, name, email, password, role, results);
@@ -121,13 +136,15 @@ public class Main {
             case "1": student.takeExam(LoggedOnUserData, result); break;
             case "2": student.viewResults(result); break;
             case "99":
-                usersFileHandler.saveRegisteredUsers(Student.newerCredentials);
+                if(!Student.newerCredentials.isEmpty())
+                {
+                    usersFileHandler.saveRegisteredUsers(Student.newerCredentials);
+                }
                 studentResultHandler.writeObject(result);
                 System.exit(0);
                 break;
             default:
                 System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
-                studentsMethods(id, name, email, password, role, result);
         }
         System.out.println("\n\n");
         studentsMethods(id, name, email, password, role, result);

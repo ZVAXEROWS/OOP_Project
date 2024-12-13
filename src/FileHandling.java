@@ -12,6 +12,7 @@ public class FileHandling <T> {
     static public List<Student> students = new ArrayList<>();
     static public List<Result> studentsResultsForAdmin = new ArrayList<>();
     private final String fileName;
+    static public String path;
     public FileHandling(String fileName){
         this.file = new File(fileName);
         this.fileName = fileName;
@@ -25,14 +26,18 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObjectList(ArrayList<T> objects) throws IOException {
-      
+        FileOutputStream fileout1 = null;
             try {
-                FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
+                fileout1 = new FileOutputStream(file);   // to append add true
                 ObjectOutputStream fileout2 = new ObjectOutputStream(fileout1);
 
                 fileout2.writeObject(objects);
             } catch (IOException e) {
+                System.out.println("Error writing object to file: " + e.getMessage());
                 throw new RuntimeException(e);
+            }
+            finally {
+                fileout1.close();
             }
     }
 
@@ -80,15 +85,23 @@ public class FileHandling <T> {
      * @throws IOException
      */
     public void writeObject(T object) throws IOException {
-
+        FileOutputStream fileOut= null;
         try
         {
-            FileOutputStream fileOut = new FileOutputStream(file);
+            fileOut = new FileOutputStream(file);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(object);
             objectOut.close();
         } catch (IOException e) {
+            System.out.println("Error writing object to file: " + e.getMessage());
             throw new RuntimeException(e);
+        }
+        finally
+        {
+            if(fileOut!=null)
+            {
+                fileOut.close();
+            }
         }
     }
 
@@ -120,18 +133,20 @@ public class FileHandling <T> {
 
 
     public void readDataForUsers() throws IOException {
-
-        BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
+        String[] tokens;
+        BufferedReader fr = new BufferedReader(new FileReader(fileName));
         try {
             String currentLine;
             while ((currentLine = fr.readLine()) != null) {
-                String[] tokens = currentLine.split("/");
+               tokens = currentLine.split("/");
                 people.add(new Person(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4]));
             }
 
             for(Person person : people){
                 if(person.role.equals("student"))
                 {
+                    path = "users"+ File.separator +person.ID+File.separator;
+                    File folder = new File(path);
                     students.add(new Student(person.ID, person.name, person.Email, person.getPassword(), person.role));
                 }
             }
@@ -145,17 +160,18 @@ public class FileHandling <T> {
     }
 
      public void saveRegisteredUsers(List<Person> newerCredentials) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(this.fileName,true));
+        BufferedWriter writer = null;
         try
         {
             for (Person person : newerCredentials)
             {
-                writer.write(person.ID+"/"+ person.name + "/" + person.Email + "/" + person.getPassword() + person.role + "\n");
+                writer = new BufferedWriter(new FileWriter(path + this.fileName,true));
+                writer.write(person.ID+"/"+ person.name + "/" + person.Email + "/" + person.getPassword() + "/" + person.role + "\n");
             }
 
         }catch (IOException e)
         {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
         finally {
             writer.close();

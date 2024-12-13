@@ -3,4 +3,4 @@
 2/nigga2/mail2/password2/student
 3/nigga3/mail3/password3/student
 4/nigga4/mail4/password4/student
-5/nigga5/mail5/password5student
+5/nigga5/mail5/password5/student
