@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Create_Exam extends Exam{
 
 
-    static Questions helper = new Questions();
+    static Questions helper = new Questions(0, null, 0, null,0);
 
 
     public static void CreateExam(Exam exam) throws IOException {
@@ -28,7 +28,7 @@ public class Create_Exam extends Exam{
         int duration = helper.limits();
         exam.setDuration(duration);
 
-        adminQuestions = new AdminMakeQuestions(title, duration);
+        adminQuestions = new AdminMakeQuestions(title, duration, examID);
 
         boolean firstQ = true;
         while (true) {
@@ -43,8 +43,8 @@ public class Create_Exam extends Exam{
                 }
             }
 
-
-            adminQuestions.questions.add(adminQuestions.newQuestion());
+            adminQuestions.newQuestion();
+            adminQuestions.questions.add(new Questions(adminQuestions.mark, adminQuestions.theQuestionTitle, adminQuestions.numOfOptions, adminQuestions.questionOptions, adminQuestions.theCorrectOne));
             firstQ = false;
         }
 

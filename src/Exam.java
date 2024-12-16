@@ -13,15 +13,8 @@ public class Exam implements Serializable {
     String Category;
     static int Duration; //in minutes
 
-    protected ArrayList<AdminMakeQuestions> theQuestions = new ArrayList<>();
 
     Scanner input = new Scanner(System.in);
-
-
-    public ArrayList<AdminMakeQuestions> getTheQuestions() {
-        return theQuestions;
-    }
-
 
     //Getter & Setters
     public int getID() {

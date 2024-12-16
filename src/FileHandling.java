@@ -5,13 +5,15 @@ import java.util.List;
 /**
  * Handle file by store and read data
  */
+
 public class FileHandling <T> {
     File file ;
-    static List<Person> people = new ArrayList<>();
-    static List<Student> students = new ArrayList<>();
+    static public List<Person> people = new ArrayList<>();
+    static public List<Student> students = new ArrayList<>();
+    static public List<Result> studentsResultsForAdmin = new ArrayList<>();
     private final String fileName;
+    static public String path;
     public FileHandling(String fileName){
-
         this.file = new File(fileName);
         this.fileName = fileName;
     }
@@ -19,51 +21,53 @@ public class FileHandling <T> {
 
     /**
      * Store an arrayList of objects
+     *
      * @param objects An object to store
      * @throws IOException
      */
     public void writeObjectList(ArrayList<T> objects) throws IOException {
-        if(objects.isEmpty())
-        {
-            boolean append = file.exists() && file.length() > 0;
+        FileOutputStream fileout1 = null;
             try {
-                FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
-                ObjectOutputStream fileout2 = append?
-                new AppendableWrittenObject(fileout1)
-                :new ObjectOutputStream(fileout1);
+                fileout1 = new FileOutputStream(file);   // to append add true
+                ObjectOutputStream fileout2 = new ObjectOutputStream(fileout1);
 
                 fileout2.writeObject(objects);
             } catch (IOException e) {
+                System.out.println("Error writing object to file: " + e.getMessage());
                 throw new RuntimeException(e);
             }
-        }
+            finally {
+                fileout1.close();
+            }
     }
 
     /**
      * Fun
+     *
      * @return ArrayList of objects that stored in the file
      * @throws IOException
      * @throws ClassNotFoundException
      */
     public  ArrayList<T> readObjectList() throws IOException, ClassNotFoundException {
-        ArrayList<T> allObjects = new ArrayList<>();
+        ArrayList<T> objects = new ArrayList<>();
         FileInputStream filein1 = null;
 
         if (!file.exists()||file.length() == 0) {
 
             System.out.println("No results available.");
-            return allObjects;
+            return objects;
         }
 
         try {
             filein1 = new FileInputStream(file);
             ObjectInputStream filein2 = new ObjectInputStream(filein1);
 
-            ArrayList<T> objects = (ArrayList<T>) filein2.readObject();
-            allObjects.addAll(objects);
+            objects = (ArrayList<T>) filein2.readObject();
+
+
 
         } catch (EOFException e) {
-           e.getMessage();
+            e.getMessage();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }finally {
@@ -71,22 +75,78 @@ public class FileHandling <T> {
                 filein1.close();
             }
         }
-        return allObjects;
+        return objects;
 
     }
 
-     public void readDataForUsers() throws IOException {
-        BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
+    /**
+     * Store an object to the file
+     * @param object An object to store
+     * @throws IOException
+     */
+    public void writeObject(T object) throws IOException {
+        FileOutputStream fileOut= null;
+        try
+        {
+            fileOut = new FileOutputStream(file);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(object);
+            objectOut.close();
+        } catch (IOException e) {
+            System.out.println("Error writing object to file: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            if(fileOut!=null)
+            {
+                fileOut.close();
+            }
+        }
+    }
+
+    /**
+     * Read an object from the file
+     *
+     * @return The object read from the file
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public T readObject() throws IOException, ClassNotFoundException {
+
+        if (!file.exists() || file.length() == 0) {
+            //System.out.println("No results available.");
+            return null;
+        }
+
+        try {
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            return (T) objectIn.readObject();
+        } catch (EOFException e) {
+            e.getMessage(); // Handle the end of file exception if needed
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+    public void readDataForUsers() throws IOException {
+        String[] tokens;
+        BufferedReader fr = new BufferedReader(new FileReader(fileName));
         try {
             String currentLine;
             while ((currentLine = fr.readLine()) != null) {
-                String[] tokens = currentLine.split("/");
+               tokens = currentLine.split("/");
                 people.add(new Person(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4]));
             }
 
             for(Person person : people){
                 if(person.role.equals("student"))
                 {
+                    path = "users"+ File.separator +person.ID+File.separator;
+                    File folder = new File(path);
                     students.add(new Student(person.ID, person.name, person.Email, person.getPassword(), person.role));
                 }
             }
@@ -100,17 +160,18 @@ public class FileHandling <T> {
     }
 
      public void saveRegisteredUsers(List<Person> newerCredentials) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(this.fileName,true));
+        BufferedWriter writer = null;
         try
         {
             for (Person person : newerCredentials)
             {
-                writer.write(person.ID+"/"+ person.name + "/" + person.Email + "/" + person.getPassword() + person.role + "\n");
+                writer = new BufferedWriter(new FileWriter(path + this.fileName,true));
+                writer.write(person.ID+"/"+ person.name + "/" + person.Email + "/" + person.getPassword() + "/" + person.role + "\n");
             }
 
         }catch (IOException e)
         {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
         finally {
             writer.close();

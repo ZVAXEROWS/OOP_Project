@@ -4,6 +4,10 @@ public class StudentQuestions extends Questions {
 
     private int studentMarks = 0;
 
+    public StudentQuestions() {
+        super(0, null, 0, null, 0);
+    }
+
     public int getStudentMarks() {
         return studentMarks;
     }
