@@ -12,6 +12,7 @@ public class Create_Exam extends Exam{
         ++examID;
         Scanner input = new Scanner(System.in);
 
+        input.nextLine();
         //Exam Title
         System.out.println("Set Exam "+exam.getID()+" _ Title");
         String title = input.nextLine();
