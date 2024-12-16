@@ -115,7 +115,6 @@ public class FileHandling <T> {
     public T readObject() throws IOException, ClassNotFoundException {
 
         if (!file.exists() || file.length() == 0) {
-            //System.out.println("No results available.");
             return null;
         }
 
@@ -146,7 +145,6 @@ public class FileHandling <T> {
                 if(person.role.equals("student"))
                 {
                     path = "users"+ File.separator +person.ID+File.separator;
-                    File folder = new File(path);
                     students.add(new Student(person.ID, person.name, person.Email, person.getPassword(), person.role));
                 }
             }
@@ -175,6 +173,60 @@ public class FileHandling <T> {
         }
         finally {
             writer.close();
+        }
+    }
+
+
+    public void SaveReports () throws IOException {
+        for(Student student : students) {
+            if (student == null || student.report == null) {
+                continue;
+            }
+            path = "users" + File.separator + student.ID + File.separator;
+            File fileDirectory = new File(path);
+            File file = new File(path + "Reports.txt");
+
+            if (!file.exists()) {
+                fileDirectory.mkdirs();
+            }
+
+            BufferedWriter writer = null;
+            try{
+                writer = new BufferedWriter(new FileWriter(file));
+                writer.write(student.report);
+                writer.newLine();
+            } catch (IOException | NullPointerException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                if (writer != null) {
+                    writer.close();
+                }
+            }
+        }
+    }
+
+    public void readReports() throws IOException {
+        BufferedReader reader = null;
+        try
+        {
+            for (Student student : students) {
+                this.file = new File("users" + File.separator + student.ID + File.separator + "Reports.txt");
+                reader = new BufferedReader(new FileReader(file));
+                for(String line = reader.readLine(); line != null; line = reader.readLine())
+                {
+                    student.report += line;
+                }
+            }
+
+        }catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        finally
+        {
+            if (reader != null) {
+                reader.close();
+            }
         }
     }
 }

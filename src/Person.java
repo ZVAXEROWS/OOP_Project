@@ -5,7 +5,6 @@ public class Person{
     public String name;
     public String role;
     public String Email;
-
     private final String password;
 
     public Person(int id, String name, String Email, String password, String role){
