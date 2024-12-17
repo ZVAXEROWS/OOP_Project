@@ -30,6 +30,7 @@ public class StudentQuestions extends Questions {
         System.out.println("Enter your Answer: ");
         Scanner input = new Scanner(System.in);
         int answer = input.nextInt();
+        System.out.println("-------------------------------------------------------\n\n\n");
 
         if (answer == questions.getTheCorrectOne()){ studentMarks += questions.getMark(); }
 

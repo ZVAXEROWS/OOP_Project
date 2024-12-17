@@ -1,4 +1,3 @@
-import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Solve_Exam extends Exam{
