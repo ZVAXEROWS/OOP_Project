@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Create_Exam extends Exam{
 
 
-    static Questions helper = new Questions(0, null, 0, null,0);
+    static Questions helper = new GenericQuestion(0, null, 0, null,0);
 
 
     public static void CreateExam(Exam exam) throws IOException {
@@ -12,20 +12,20 @@ public class Create_Exam extends Exam{
         ++examID;
         Scanner input = new Scanner(System.in);
 
-        input.nextLine();
         //Exam Title
+        System.out.println("\n\n=================================================");
         System.out.println("Set Exam "+exam.getID()+" _ Title");
         String title = input.nextLine();
 
 
         //Exam Category
-        System.out.println("Set Exam "+exam.getID()+" _ Category");
+        System.out.println("\nSet Exam "+exam.getID()+" _ Category");
         String Category = input.nextLine();
         exam.setCategory(Category);
 
 
         //Exam Duration
-        System.out.println("Set Exam "+exam.getID()+" _ Duration In Minutes");
+        System.out.println("\nSet Exam "+exam.getID()+" _ Duration In Minutes");
         int duration = helper.limits();
         exam.setDuration(duration);
 
@@ -35,7 +35,7 @@ public class Create_Exam extends Exam{
         while (true) {
             if (firstQ == false) {
 
-                System.out.println("do You want to continue - done or no to end");
+                System.out.print("\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\ndo You want to continue - (done or no to end): ");
                 String isDone = input.nextLine().toLowerCase();
 
                 if (isDone.equals("done") || isDone.equals("no")) {
@@ -45,7 +45,7 @@ public class Create_Exam extends Exam{
             }
 
             adminQuestions.newQuestion();
-            adminQuestions.questions.add(new Questions(adminQuestions.mark, adminQuestions.theQuestionTitle, adminQuestions.numOfOptions, adminQuestions.questionOptions, adminQuestions.theCorrectOne));
+            adminQuestions.questions.add(new GenericQuestion(adminQuestions.mark, adminQuestions.theQuestionTitle, adminQuestions.numOfOptions, adminQuestions.questionOptions, adminQuestions.theCorrectOne));
             firstQ = false;
         }
 

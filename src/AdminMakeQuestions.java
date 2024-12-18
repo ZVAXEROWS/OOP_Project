@@ -24,32 +24,38 @@ public class AdminMakeQuestions extends Questions implements Serializable{
     }
 
      public Questions newQuestion() {
-        //Question Title
-        System.out.println("Enter the question title:");
-        theQuestionTitle = input.nextLine();
+         //Question Title
+         System.out.println("\n\n-------------------------------------------------------");
+         System.out.println("Enter the question title:");
+         theQuestionTitle = input.nextLine();
 
 
-        //Question Mark
-        System.out.println("Enter the mark for the question:");
-        mark = limits();
+         //Question Mark
+         System.out.println("\n\nEnter the mark for the question:");
+         mark = limits();
+         input.nextLine();
 
 
-        //Num Of Options
-        System.out.println("Enter the number of options");
-        numOfOptions=limits(2,6);
+         //Num Of Options
+         System.out.println("\n\nEnter the number of options");
+         numOfOptions=limits(2,6);
+         input.nextLine();
 
-        //Options
-        questionOptions = new String[numOfOptions];
+         //Options
+         System.out.println("\n");
+         questionOptions = new String[numOfOptions];
 
-        input.nextLine();
-        for (int i =0; i < numOfOptions ; i++){
-            System.out.println("Enter option " + (i + 1) + ":");
-            questionOptions[i] = input.nextLine();
-        }
+         input.nextLine();
+         for (int i =0; i < numOfOptions ; i++){
+             System.out.println("Enter option " + (i + 1) + ":");
+             questionOptions[i] = input.nextLine();
+             System.out.println("\n");
+         }
 
-        //Correct Choice
-        System.out.println("Enter the number of the correct choice:");
-        theCorrectOne = limits(1,numOfOptions);
-        return new Questions(0,null,0,null,0);
+         //Correct Choice
+         System.out.println("\n\nEnter the number of the correct choice: \n");
+         theCorrectOne = limits(1,numOfOptions);
+         input.nextLine();
+         return new GenericQuestion(0, null, 0, null, 0);
     }
 }

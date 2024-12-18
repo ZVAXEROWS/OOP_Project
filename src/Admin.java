@@ -73,10 +73,10 @@ public class Admin extends Person {
                 String complete = null;
                 do {
                     var currentExam = category.availableCategories.get(choice).exams.get(ExamChoice);
-                    System.out.println("========= Exam ID: " + currentExam.examID + " ================");
+                    System.out.println("\n\n========= Exam ID: " + currentExam.examID + " ================");
                     System.out.println("[0] Exam Title: " + currentExam.examTitle);
                     System.out.println("[1] Exam category: " + currentExam.category);
-                    System.out.println("[2] Exam duration: " + currentExam.duration);
+                    System.out.println("[2] Exam duration: " + currentExam.duration + "(in minutes)");
                     System.out.println("[3] Exam Questions");
                     System.out.println("[99] Exit Editing");
                     System.out.print("Select an option to Edit: ");
@@ -86,17 +86,17 @@ public class Admin extends Person {
                         switch (option) {
                             case 0:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam Title");
+                                System.out.print("Set the new Exam Title: ");
                                 currentExam.examTitle = reader.nextLine();
                                 break;
                             case 1:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam Category");
+                                System.out.print("Set the new Exam Category: ");
                                 currentExam.category = reader.nextLine();
                                 break;
                             case 2:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam duration");
+                                System.out.print("Set the new Exam duration: ");
                                 currentExam.duration = reader.nextInt();
                                 reader.nextLine();
                                 break;
@@ -105,7 +105,7 @@ public class Admin extends Person {
                                 for(int i = 0; i < currentExam.questions.size(); i++) {
                                     System.out.println("["+questionsCounter+++"] "+currentExam.questions.get(i).theQuestionTitle);
                                 }
-                                System.out.print("Choose question to edit: ");
+                                System.out.print("\n\n---------------------------\nChoose question to edit: ");
                                 int questionChoice = reader.nextInt();
                                 if(questionChoice >= 0 && questionChoice <= currentExam.questions.size())
                                 {

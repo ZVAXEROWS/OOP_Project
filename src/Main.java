@@ -112,7 +112,7 @@ public class Main {
                 reports.SaveReports();
                 System.exit(0); break;
             default:
-                System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
+                System.out.println("\t\txxxxxxxxxxxx Invalid option xxxxxxxxxxxx\n\n");
         }
         System.out.println("\n\n");
         adminMethods(id, name, email, password, role, results);

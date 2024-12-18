@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Questions implements Serializable{
+abstract public class Questions implements Serializable{
 
     // Attributes
     protected static int questionID = 0 ;
