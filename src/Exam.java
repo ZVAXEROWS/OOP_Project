@@ -5,16 +5,12 @@ Questions.
 ● Must have a time limit, after which it auto-submits.
 */
 import java.io.Serializable;
-import java.util.*;
 
 public class Exam implements Serializable {
 
     static int examID=0;
     String Category;
     static int Duration; //in minutes
-
-
-    Scanner input = new Scanner(System.in);
 
 
     //Getter & Setters

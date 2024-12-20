@@ -27,20 +27,19 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         theQuestionTitle = input.nextLine();
 
 
-
         //Question Mark
-         System.out.println("-------------------------------------------------------\n\n\n");
+         System.out.println("\n\n\n-------------------------------------------------------");
          System.out.println("Enter the mark for the question:");
-        mark = limits();
+         mark = limits();
 
 
         //Num Of Options
-         System.out.println("-------------------------------------------------------\n\n\n");
+         System.out.println("\n\n\n-------------------------------------------------------");
         System.out.println("Enter the number of options");
         numOfOptions=limits(2,6);
 
         //Options
-         System.out.println("-------------------------------------------------------\n\n\n");
+         System.out.println("\n\n\n-------------------------------------------------------");
         questionOptions = new String[numOfOptions];
 
         input.nextLine();
@@ -51,7 +50,7 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         }
 
         //Correct Choice
-         System.out.println("-------------------------------------------------------\n\n\n");
+         System.out.println("\n\n\n-------------------------------------------------------");
         System.out.println("Enter the number of the correct choice: \n");
         theCorrectOne = limits(1,numOfOptions);
          return new GenericQuestion(0, null, 0, null, 0);
