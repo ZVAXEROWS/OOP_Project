@@ -3,15 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Handle file by store and read data
+ * Handle file by store and read data.
  */
-
 public class FileHandling <T> {
     File file ;
     static public List<Person> people = new ArrayList<>();
     static public List<Student> students = new ArrayList<>();
     static public List<Result> studentsResultsForAdmin = new ArrayList<>();
     private final String fileName;
+
     public FileHandling(String fileName){
         this.file = new File(fileName);
         this.fileName = fileName;
@@ -19,12 +19,10 @@ public class FileHandling <T> {
 
 
     /**
-     * Store an arrayList of objects
-     *
-     * @param objects An object to store
-     * @throws IOException
+     * Store an arrayList of objects.
+     * @param objects An object to store.
      */
-    public void writeObjectList(ArrayList<T> objects) throws IOException {
+    public void writeObjectList(ArrayList<T> objects)  {
       
             try {
                 FileOutputStream fileout1 = new FileOutputStream(file);   // to append add true
@@ -37,13 +35,11 @@ public class FileHandling <T> {
     }
 
     /**
-     * Fun
-     *
-     * @return ArrayList of objects that stored in the file
+     * Method to read list of any type of objects.
+     * @return ArrayList of objects that stored in the file.
      * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public  ArrayList<T> readObjectList() throws IOException, ClassNotFoundException {
+    public  ArrayList<T> readObjectList() throws IOException {
         ArrayList<T> objects = new ArrayList<>();
         FileInputStream filein1 = null;
 
@@ -75,11 +71,10 @@ public class FileHandling <T> {
     }
 
     /**
-     * Store an object to the file
-     * @param object An object to store
-     * @throws IOException
+     * Store an object to the file.
+     * @param object An object to store.
      */
-    public void writeObject(T object) throws IOException {
+    public void writeObject(T object) {
         try
         {
             FileOutputStream fileOut = new FileOutputStream(file);
@@ -92,16 +87,13 @@ public class FileHandling <T> {
     }
 
     /**
-     * Read an object from the file
-     *
-     * @return The object read from the file
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * Read an object from the file.
+     * @return The object from the file.
      */
-    public T readObject() throws IOException, ClassNotFoundException {
+    public T readObject(){
 
         if (!file.exists() || file.length() == 0) {
-            //System.out.println("No results available.");
+
             return null;
         }
 
@@ -118,6 +110,10 @@ public class FileHandling <T> {
     }
 
 
+    /**
+     * Read the data of users from the file.
+     * @throws IOException
+     */
     public void readDataForUsers() throws IOException {
 
         BufferedReader fr = new BufferedReader(new FileReader(this.fileName));
@@ -143,7 +139,12 @@ public class FileHandling <T> {
         }
     }
 
-     public void saveRegisteredUsers(List<Person> newerCredentials) throws IOException {
+    /**
+     * Store the data of users in file.
+     * @param newerCredentials the data of new users.
+     * @throws IOException
+     */
+    public void saveRegisteredUsers(List<Person> newerCredentials) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.fileName,true));
         try
         {

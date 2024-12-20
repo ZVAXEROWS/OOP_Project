@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Calculate the results of students
+ * Calculate the results of students.
  */
 public class Result implements Serializable {
 
@@ -13,8 +13,8 @@ public class Result implements Serializable {
 
 
     /**
-     * @param studentID   The id of the student
-     * @param studentName The name of the student
+     * @param studentID   The id of the student.
+     * @param studentName The name of the student.
      */
     public Result(String studentID, String studentName) {
 
@@ -24,14 +24,12 @@ public class Result implements Serializable {
     }
 
 
-    public String getStudentName() {
-        return studentName;
-    }
-    public String getStudentID() {
-        return studentID;
-    }
-
-
+    /**
+     * To add an exam result.
+     * @param examIndex The index of the exam to access some data of it.
+     * @param examMark The total mark of the exam.
+     * @param result The mark of the student in the exam.
+     */
     public void addExamResult(int examIndex, int examMark, int result) {
 
         ExamResult examResult = new ExamResult(examIndex, examMark, result);
@@ -42,7 +40,7 @@ public class Result implements Serializable {
 
 
     /**
-     * Display the student results
+     * Display the student results.
      */
     public void displayStudentResults() {
 
