@@ -28,7 +28,7 @@ public class Create_Exam extends Exam{
         int duration = helper.limits();
         exam.setDuration(duration);
 
-        adminQuestions = new AdminMakeQuestions(title, duration, examID);
+        adminQuestions = new AdminMakeQuestions(title, duration, examID, Category);
 
         boolean firstQ = true;
         while (true) {

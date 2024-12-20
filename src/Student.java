@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Student <T> extends Person {
 
     Scanner reader = new Scanner(System.in);
+    public String report = "";
     public static List<Person> newerCredentials = new ArrayList<>();
     Solve_Exam exam;
     public Student(int id,String name, String email, String password, String role) throws IOException {
@@ -17,7 +18,7 @@ public class Student <T> extends Person {
         upComingResult.displayStudentResults();
     }
 
-    public void takeExam(List<String> data, Result result){
+    public void takeExam( Result result){
 
         if(!AdminMakeQuestions.createdExam.isEmpty())
         {
@@ -36,7 +37,7 @@ public class Student <T> extends Person {
             else
             {
                 System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n");
-                takeExam(data, result);
+                takeExam(result);
             }
         }
         else

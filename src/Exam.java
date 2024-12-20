@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Exam implements Serializable {
 
-    static int examID=0;
+    static int examID = !AdminMakeQuestions.createdExam.isEmpty() ? AdminMakeQuestions.createdExam.size(): 0 ;
     String Category;
     static int Duration; //in minutes
 

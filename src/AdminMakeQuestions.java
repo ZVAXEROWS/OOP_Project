@@ -7,6 +7,7 @@ public class AdminMakeQuestions extends Questions implements Serializable{
     protected int examID;
     public String examTitle;
     public int duration;
+    public String category;
     public ArrayList<Questions> questions = new ArrayList<>();
 
     @Override
@@ -14,8 +15,9 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         return super.getTheCorrectOne();
     }
 
-    public AdminMakeQuestions(String title, int duration, int examID){
+    public AdminMakeQuestions(String title, int duration, int examID, String category) {
         super(0,null, 0, null, 0);
+        this.category = category;
         this.examTitle = title;
         this.duration = duration;
         this.examID = examID;
