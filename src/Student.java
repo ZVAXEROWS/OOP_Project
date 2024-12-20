@@ -18,7 +18,7 @@ public class Student <T> extends Person {
         upComingResult.displayStudentResults();
     }
 
-    public void takeExam( Result result){
+    public void takeExam(Result result){
 
         if(!AdminMakeQuestions.createdExam.isEmpty())
         {

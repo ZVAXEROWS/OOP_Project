@@ -7,8 +7,8 @@ import java.util.List;
  */
 public class Result implements Serializable {
 
-    private final String studentName;
-    private final String studentID;
+    private String studentName;
+    private String studentID;
     public List<ExamResult> examResults = new ArrayList<>();
 
 
