@@ -1,7 +1,7 @@
 //last
 /*
 Has an ID, Title, Category, Duration, Total Marks, and List of
-Questions.
+QuestionsPackage.Questions.
 ● Must have a time limit, after which it auto-submits.
 */
 import java.io.Serializable;
@@ -27,7 +27,5 @@ public class Exam implements Serializable {
         Duration = duration;
         return duration;
     }
-
-
 
 }

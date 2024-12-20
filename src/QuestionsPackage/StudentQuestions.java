@@ -1,8 +1,11 @@
+package QuestionsPackage;
+
 import java.util.Scanner;
 
 public class StudentQuestions extends Questions {
 
     private int studentMarks = 0;
+    static int questionNum = 1;
 
     public StudentQuestions() {
         super(0, null, 0, null, 0);
@@ -11,13 +14,13 @@ public class StudentQuestions extends Questions {
     public int getStudentMarks() {
         return studentMarks;
     }
-    static int x = 1;
+
 
 
     public void solveQuestion(Questions questions){
 
-        System.out.println("Question: " + x);
-        x++;
+        System.out.println("Question: " + questionNum);
+        questionNum++;
 
         System.out.println(questions.getTheQuestionTitle() + "\n");
 

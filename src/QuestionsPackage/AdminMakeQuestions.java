@@ -1,13 +1,14 @@
+package QuestionsPackage;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class AdminMakeQuestions extends Questions implements Serializable{
 
-    static ArrayList<AdminMakeQuestions> createdExam = new ArrayList<>();
+    public static ArrayList<AdminMakeQuestions> createdExam = new ArrayList<>();
     protected int examID;
     public String examTitle;
     public int duration;
-    public String category;
     public ArrayList<Questions> questions = new ArrayList<>();
 
     @Override
@@ -15,9 +16,8 @@ public class AdminMakeQuestions extends Questions implements Serializable{
         return super.getTheCorrectOne();
     }
 
-    public AdminMakeQuestions(String title, int duration, int examID, String category) {
+    public AdminMakeQuestions(String title, int duration, int examID){
         super(0,null, 0, null, 0);
-        this.category = category;
         this.examTitle = title;
         this.duration = duration;
         this.examID = examID;
@@ -26,6 +26,7 @@ public class AdminMakeQuestions extends Questions implements Serializable{
      public Questions newQuestion() {
         //Question Title
         System.out.println("Enter the question title:");
+        input.nextLine();
         theQuestionTitle = input.nextLine();
 
 

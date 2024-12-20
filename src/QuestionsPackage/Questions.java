@@ -1,15 +1,16 @@
+package QuestionsPackage;
+
 import java.util.*;
 import java.io.*;
 
 public abstract class Questions implements Serializable{
 
     // Attributes
-    protected static int questionID = 0 ;
-    protected int mark;
-    protected String theQuestionTitle;
-    protected int numOfOptions;
-    protected String [] questionOptions;
-    protected int theCorrectOne;
+    public int mark;
+    public String theQuestionTitle;
+    public int numOfOptions;
+    public String [] questionOptions;
+    public int theCorrectOne;
 
     transient Scanner input = new Scanner(System.in);
 
@@ -31,9 +32,6 @@ public abstract class Questions implements Serializable{
         return theQuestionTitle;
     }
 
-    public int getNumOfOptions() {
-        return numOfOptions;
-    }
 
     public String[] getQuestionOptions() {
         return questionOptions;

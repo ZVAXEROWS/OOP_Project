@@ -1,3 +1,6 @@
+import QuestionsPackage.AdminMakeQuestions;
+import QuestionsPackage.StudentQuestions;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Solve_Exam extends Exam{
@@ -27,7 +30,7 @@ public class Solve_Exam extends Exam{
         timerThread.start();
 
 
-        int totalMarks = 0, y=0;
+        int totalMarks = 0, checkExamIndex=0;
         StudentQuestions studentQuestions = new StudentQuestions();
 
         System.out.println("Number of questions: " + AdminMakeQuestions.createdExam.get(examIndex).questions.size());
@@ -35,14 +38,18 @@ public class Solve_Exam extends Exam{
         for (int i = 0; i < AdminMakeQuestions.createdExam.get(examIndex).questions.size(); i++) {
 
             if(timeUp.get() || stopExam.get()){
+                for (int j = AdminMakeQuestions.createdExam.get(examIndex).questions.size()-i; j<AdminMakeQuestions.createdExam.get(examIndex).questions.size() ; j++){
+                    checkExamIndex++;
+                    totalMarks += AdminMakeQuestions.createdExam.get(examIndex).questions.get(j).getMark();
+                }
                 break;
             }
 
             totalMarks += AdminMakeQuestions.createdExam.get(examIndex).questions.get(i).getMark();
             studentQuestions.solveQuestion(AdminMakeQuestions.createdExam.get(examIndex).questions.get(i));
-            y++;
+            checkExamIndex++;
 
-            if (y == AdminMakeQuestions.createdExam.get(examIndex).questions.size()) {
+            if (checkExamIndex == AdminMakeQuestions.createdExam.get(examIndex).questions.size()) {
                 stopExam.set(true);
             }
 
@@ -54,7 +61,5 @@ public class Solve_Exam extends Exam{
         result.addExamResult(examIndex, totalMarks,  studentQuestions.getStudentMarks());
         System.out.println("Your degree is " + studentQuestions.getStudentMarks() + " of " + totalMarks);
     }
-
-
 
 }

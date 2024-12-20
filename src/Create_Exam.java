@@ -1,5 +1,11 @@
+import QuestionsPackage.AdminMakeQuestions;
+import QuestionsPackage.GenericQuestion;
+import QuestionsPackage.Questions;
+
 import java.io.IOException;
 import java.util.Scanner;
+
+import QuestionsPackage.*;
 
 public class Create_Exam extends Exam{
 
@@ -36,7 +42,6 @@ public class Create_Exam extends Exam{
 
                 System.out.println("do You want to continue - done or no to end");
                 String isDone = input.nextLine().toLowerCase();
-                input.nextLine();
 
                 if (isDone.equals("done") || isDone.equals("no")) {
                     AdminMakeQuestions.createdExam.add(adminQuestions);

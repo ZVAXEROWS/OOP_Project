@@ -1,3 +1,5 @@
+import QuestionsPackage.AdminMakeQuestions;
+
 import java.io.Serializable;
 
 public class ExamResult implements Serializable {
