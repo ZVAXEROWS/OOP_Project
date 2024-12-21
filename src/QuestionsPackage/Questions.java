@@ -51,7 +51,7 @@ public abstract class Questions implements Serializable{
         boolean isValid = false;
 
         while (!isValid) {
-            System.out.print("Please enter an integer between " + firstlim + " and " + lastlim + "\n");
+            System.out.print("(Please enter an integer between " + firstlim + " and " + lastlim + " ) :\t");
             if (input.hasNextInt()) { // Check if input is an integer
 
                 theInputnum = input.nextInt();
@@ -59,11 +59,11 @@ public abstract class Questions implements Serializable{
                 if (theInputnum >= firstlim && theInputnum <= lastlim) {
                     isValid = true; // Valid input within the range
                 } else {
-                    System.out.println("The number is out of range. Try again!");
+                    System.out.println("\nxxxxxxxxxxxxxx The number is out of range. Try again! xxxxxxxxxxxxxx\n");
                 }
 
             } else {
-                System.out.println("That's not a valid integer. Try again!");
+                System.out.println("\nxxxxxxxxxxxxxx That's not a valid integer. Try again! xxxxxxxxxxxxxx\n");
                 input.next(); // Consume invalid input
             }
         }
@@ -77,7 +77,7 @@ public abstract class Questions implements Serializable{
         boolean isValid = false;
 
         while (!isValid) {
-            System.out.print("Please enter an integer between greater than 0 \n");
+            System.out.print("(Please enter an integer greater than 0) :\t");
             if (input.hasNextInt()) { // Check if input is an integer
 
                 theInputnum = input.nextInt();
@@ -85,11 +85,11 @@ public abstract class Questions implements Serializable{
                 if (theInputnum > 0) {
                     isValid = true; // Valid input within the range
                 } else {
-                    System.out.println("The number must be greater than 0. Try again!");
+                    System.out.println("\nxxxxxxxxxxxxxx The number must be greater than 0. Try again! xxxxxxxxxxxxxx\n");
                 }
 
             } else {
-                System.out.println("That's not a valid integer. Try again!");
+                System.out.println("\nxxxxxxxxxxxxxx That's not a valid integer. Try again! xxxxxxxxxxxxxx\n");
                 input.next(); // Consume invalid input
             }
         }

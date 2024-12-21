@@ -13,6 +13,7 @@ public class FileHandling <T> {
     static public List<Result> studentsResultsForAdmin = new ArrayList<>();
     private final String fileName;
     static public String path;
+
     public FileHandling(String fileName){
         this.file = new File(fileName);
         this.fileName = fileName;

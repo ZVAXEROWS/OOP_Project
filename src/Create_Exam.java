@@ -1,17 +1,12 @@
-import QuestionsPackage.AdminMakeQuestions;
-import QuestionsPackage.GenericQuestion;
-import QuestionsPackage.Questions;
+import QuestionsPackage.*;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-import QuestionsPackage.*;
-
-public class Create_Exam extends Exam{
+public class Create_Exam extends Exam {
 
 
-    static Questions helper = new GenericQuestion(0, null, 0, null,0);
-
+    static Questions helper = new GenericQuestion(0, null, 0, null, 0);
 
     public static void CreateExam(Exam exam) throws IOException {
         AdminMakeQuestions adminQuestions;
@@ -19,18 +14,20 @@ public class Create_Exam extends Exam{
         Scanner input = new Scanner(System.in);
 
         //Exam Title
-        System.out.println("Set Exam "+exam.getID()+" _ Title");
-        String title = input.nextLine();
-
+        System.out.println("\n\n=================================================");
+        System.out.print("Set Exam " + exam.getID() + "  Title: \t");
+        String title;
+        do{title = input.nextLine();}while (title.isBlank());
 
         //Exam Category
-        System.out.println("Set Exam "+exam.getID()+" _ Category");
-        String Category = input.nextLine();
+        System.out.print("\nSet Exam " + exam.getID() + "  Category: \t");
+        String Category;
+        do{Category = input.nextLine();}while (Category.isBlank());
         exam.setCategory(Category);
 
 
         //Exam Duration
-        System.out.println("Set Exam "+exam.getID()+" _ Duration In Minutes");
+        System.out.print("\nSet Exam " + exam.getID() + " _ Duration In Minutes\t");
         int duration = helper.limits();
         exam.setDuration(duration);
 
@@ -40,7 +37,7 @@ public class Create_Exam extends Exam{
         while (true) {
             if (firstQ == false) {
 
-                System.out.println("do You want to continue - done or no to end");
+                System.out.print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ndo You want to continue - (done or no to end): ");
                 String isDone = input.nextLine().toLowerCase();
 
                 if (isDone.equals("done") || isDone.equals("no")) {
@@ -55,6 +52,4 @@ public class Create_Exam extends Exam{
         }
 
     }
-
-
 }

@@ -1,3 +1,5 @@
+import QuestionsPackage.AdminMakeQuestions;
+
 import java.io.IOException;
 import java.util.*;
 public class Admin extends Person {
@@ -46,6 +48,7 @@ public class Admin extends Person {
 
     public void editExam()
     {
+
         Category category = new Category();
         Set<String> categoriesSet = new HashSet<>();
 
@@ -57,9 +60,19 @@ public class Admin extends Person {
 
             System.out.println("\nAvailable categories:\n");
             category.getCategoriesList(categoriesSet);
-            int choice = reader.nextInt();
+
+            int choice = 0;
+            try {
+                choice = reader.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("\nxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxx \n\n");
+                editExam();
+            }
+
             int counter = 0;
+
             System.out.println("\nAvailable exams:\n");
+
             for (int i = 0; i < AdminMakeQuestions.createdExam.size(); i++) {
                 if (AdminMakeQuestions.createdExam.get(i).category.equals(category.getCategory(choice))) {
                     category.availableCategories.get(choice).setExams(AdminMakeQuestions.createdExam.get(i));
@@ -67,112 +80,160 @@ public class Admin extends Person {
                 }
             }
 
-            int ExamChoice = reader.nextInt();
+            int ExamChoice = 0;
+            try {
+                ExamChoice = reader.nextInt();
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxx \n\n");
+                editExam();
+            }
+
             boolean exit = false;
             try {
                 String complete = null;
                 do {
                     var currentExam = category.availableCategories.get(choice).exams.get(ExamChoice);
-                    System.out.println("========= Exam ID: " + currentExam.examID + " ================");
+                    System.out.println("\n\n========= Exam ID: " + currentExam.examID + " ================");
                     System.out.println("[0] Exam Title: " + currentExam.examTitle);
                     System.out.println("[1] Exam category: " + currentExam.category);
-                    System.out.println("[2] Exam duration: " + currentExam.duration);
+                    System.out.println("[2] Exam duration: " + currentExam.duration + "(in minutes)");
                     System.out.println("[3] Exam Questions");
                     System.out.println("[99] Exit Editing");
-                    System.out.print("Select an option to Edit: ");
+                    System.out.print("\nSelect an option to Edit: ");
                     int option = reader.nextInt();
 
                     if (option >= 0 && option <= 3 || option == 99) {
                         switch (option) {
                             case 0:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam Title");
-                                currentExam.examTitle = reader.nextLine();
+                                System.out.print("\nSet the new Exam Title: ");
+                                String title = reader.nextLine();
+                                if(!title.isBlank())
+                                {
+                                    currentExam.examTitle = title;
+                                }
+                                else {
+                                    System.out.println("\nxxxxxxxxxxxxx No Title provided xxxxxxxxxxxxx \n\n");
+                                }
                                 break;
+
                             case 1:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam Category");
-                                currentExam.category = reader.nextLine();
+                                System.out.print("\nSet the new Exam Category: ");
+                                String newCategory = reader.nextLine();
+                                if(!newCategory.isBlank())
+                                {
+                                    currentExam.category = newCategory;
+                                }
+                                else {
+                                    System.out.println("\nxxxxxxxxxxxxx No Category provided xxxxxxxxxxxxx \n\n");
+                                }
+
                                 break;
                             case 2:
                                 reader.nextLine();
-                                System.out.print("Set the new Exam duration");
-                                currentExam.duration = reader.nextInt();
-                                reader.nextLine();
+                                System.out.print("\nSet the new Exam duration: ");
+                                try {
+                                    int duration = reader.nextInt();
+                                    if (duration > 0) {
+                                        currentExam.duration = duration;
+                                    } else {
+                                        System.out.println("\nxxxxxxxxxxxxx Invalid Duration xxxxxxxxxxxxx \n\n");
+                                    }
+                                    reader.nextLine();
+                                }catch (InputMismatchException e)
+                                {
+                                    System.out.println("\nxxxxxxxxxxxxx Invalid Duration xxxxxxxxxxxxx \n\n");
+                                }
                                 break;
                             case 3:
                                 int questionsCounter = 0;
                                 for(int i = 0; i < currentExam.questions.size(); i++) {
                                     System.out.println("["+questionsCounter+++"] "+currentExam.questions.get(i).theQuestionTitle);
                                 }
-                                System.out.print("Choose question to edit: ");
+                                System.out.print("\n\n---------------------------\nChoose question to edit: ");
                                 int questionChoice = reader.nextInt();
-                                if(questionChoice >= 0 && questionChoice <= currentExam.questions.size())
-                                {
+                                if(questionChoice >= 0 && questionChoice <= currentExam.questions.size()) {
                                     System.out.println("[0] Question Title: " + currentExam.questions.get(questionChoice).theQuestionTitle);
                                     System.out.println("[1] Question Mark: " + currentExam.questions.get(questionChoice).mark);
-                                    System.out.println("[2] Question Correct Option: " + currentExam.questions.get(questionChoice).theCorrectOne);
+                                    System.out.println("[2] Question Correct Answer: " + currentExam.questions.get(questionChoice).theCorrectOne);
                                     System.out.println("[3] Question Options ");
-                                    System.out.print("Choose property to edit: ");
+                                    System.out.print("\nChoose property to edit: ");
                                     int property = reader.nextInt();
-                                    if(property >= 0 && property <= 4)
-                                    {
-                                        switch(property)
-                                        {
-                                            case 0:
+                                    switch (property) {
+                                        case 0:
+                                            reader.nextLine();
+                                            System.out.print("\nSet the new Question Title: ");
+                                            String newQuestionTitle = reader.nextLine();
+                                            if(!newQuestionTitle.isBlank())
+                                            {
+                                                currentExam.questions.get(questionChoice).theQuestionTitle = newQuestionTitle;
+                                            }
+                                            else {
+                                                System.out.println("\nxxxxxxxxxxxxx No Title provided xxxxxxxxxxxxx \n\n");
+                                            }
+                                            break;
+                                        case 1:
+                                            reader.nextLine();
+                                            System.out.print("\nSet the new Question Mark: ");
+                                            try {
+                                                int mark = reader.nextInt();
+                                                if (mark > 0) {
+                                                    currentExam.questions.get(questionChoice).mark = mark;
+                                                } else {
+                                                    System.out.println("\nxxxxxxxxxxxxx Invalid Mark xxxxxxxxxxxxx \n\n");
+                                                }
                                                 reader.nextLine();
-                                                System.out.print("Set the new Question Title: ");
-                                                currentExam.questions.get(questionChoice).theQuestionTitle = reader.nextLine();
-                                                break;
-                                            case 1:
-                                                reader.nextLine();
-                                                System.out.print("Set the new Question Mark: ");
-                                                currentExam.questions.get(questionChoice).mark = reader.nextInt();
-                                                reader.nextLine();
-                                                break;
-                                            case 2:
-                                                reader.nextLine();
-                                                System.out.print("Set the new Question Correct Option between 1 and " + currentExam.questions.get(questionChoice).numOfOptions + ": ");
-                                                int input = reader.nextInt();
-                                                reader.nextLine();
-                                                if( input >= 1 && input <= currentExam.questions.get(questionChoice).numOfOptions)
+                                            }catch (InputMismatchException e)
+                                            {
+                                                System.out.println("\nxxxxxxxxxxxxx Invalid Mark xxxxxxxxxxxxx \n\n");
+                                            }
+                                            break;
+                                        case 2:
+                                            reader.nextLine();
+                                            System.out.print("\nSet the new Question Correct Option between 1 and " + currentExam.questions.get(questionChoice).numOfOptions + ": ");
+                                            int input = reader.nextInt();
+                                            reader.nextLine();
+                                            if (input >= 1 && input <= currentExam.questions.get(questionChoice).numOfOptions) {
+                                                try
                                                 {
                                                     currentExam.questions.get(questionChoice).theCorrectOne = input;
                                                 }
-                                                else
+                                                catch (InputMismatchException e)
                                                 {
                                                     System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
-                                                    continue;
                                                 }
-                                                break;
-                                            case 3:
-                                                for(int j = 0; j < currentExam.questions.get(questionChoice).numOfOptions; j++)
-                                                {
-                                                    System.out.println("["+j+"] "+currentExam.questions.get(questionChoice).questionOptions[j]);
-                                                }
-                                                System.out.print("choose option to edit: ");
-                                                int optionNum = reader.nextInt();
-                                                if(optionNum >= 0 && optionNum < currentExam.questions.get(questionChoice).numOfOptions)
-                                                {
-                                                    reader.nextLine();
-                                                    System.out.print("Set the new Option Title: ");
-                                                    currentExam.questions.get(questionChoice).questionOptions[optionNum] = reader.nextLine();
-                                                }
-                                                else
-                                                {
-                                                    System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
-                                                    continue;
-                                                }
-                                                break;
-                                            default:
+                                            } else {
                                                 System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
                                                 continue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
-                                        continue;
+                                            }
+                                            break;
+                                        case 3:
+                                            for (int j = 0; j < currentExam.questions.get(questionChoice).numOfOptions; j++) {
+                                                System.out.println("[" + j + "] " + currentExam.questions.get(questionChoice).questionOptions[j]);
+                                            }
+                                            System.out.print("\nchoose option to edit: ");
+                                            int optionNum = reader.nextInt();
+                                            if (optionNum >= 0 && optionNum < currentExam.questions.get(questionChoice).numOfOptions) {
+                                                reader.nextLine();
+                                                System.out.print("\nSet the new Option Title: ");
+                                                String newTitle = reader.nextLine();
+                                                if(!newTitle.isBlank())
+                                                {
+                                                    currentExam.questions.get(questionChoice).questionOptions[optionNum] = newTitle;
+                                                }
+                                                else {
+                                                    System.out.println("\nxxxxxxxxxxxxx No Title provided xxxxxxxxxxxxx \n\n");
+                                                }
+                                            } else {
+                                                System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
+                                                continue;
+                                            }
+                                            break;
+                                        default:
+                                            System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
+                                            continue;
                                     }
                                 }
                                 else
@@ -194,7 +255,7 @@ public class Admin extends Person {
                     }
                     if(!exit)
                     {
-                        System.out.print("do you want to make another process?(yes/no): ");
+                        System.out.print("\n\n---------------------------------\ndo you want to make another process?(yes/no): ");
                         complete = reader.nextLine().toLowerCase();
                     }
                     else
@@ -254,19 +315,28 @@ public class Admin extends Person {
             System.out.println("Write Your Report For [" + students.get(choice).name + "]:");
             reader.nextLine();
             String report = reader.nextLine();
-            int select;
-            do {
-                System.out.println("[0] Delete Previous Report and make a New Report\n[1] Add to Previous Report");
-                select = reader.nextInt();
-                switch (select) {
-                    case 0: students.get(choice).report = report;
-                    break;
-                    case 1: students.get(choice).report += "\n"+report;
-                    break;
-                    default: System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
-                }
+            if(!report.isBlank()) {
 
-            } while (select != 0 && select != 1);
+                int select;
+                do {
+                    System.out.println("[0] Delete Previous Report and make a New Report from the written one\n[1] Add to Previous Report");
+                    select = reader.nextInt();
+                    switch (select) {
+                        case 0:
+                            students.get(choice).report = report;
+                            break;
+                        case 1:
+                            students.get(choice).report += "\n" + report;
+                            break;
+                        default:
+                            System.out.println("\nxxxxxxxxxxxxxx Invalid Option xxxxxxxxxxxxxxxx");
+                    }
+
+                } while (select != 0 && select != 1);
+            }
+            else {
+                System.out.println("\nxxxxxxxxxxxxxx Invalid Entry xxxxxxxxxxxxxxxx");
+            }
 
         }catch (IndexOutOfBoundsException e) {
             System.out.println("\nxxxxxxxxxxx Student not found xxxxxxxxxxx");
@@ -276,3 +346,4 @@ public class Admin extends Person {
     }
 
 }
+

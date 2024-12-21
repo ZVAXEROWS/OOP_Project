@@ -1,6 +1,6 @@
-0/nigga/mail/password/admin
-1/nigga1/mail1/password1/student
-2/nigga2/mail2/password2/student
-3/nigga3/mail3/password3/student
-4/nigga4/mail4/password4/student
-5/nigga5/mail5/password5/student
+0/Admin/mail/password/admin
+1/Omar/mail1/password1/student
+2/Ahmed/mail2/password2/student
+3/Hesham/mail3/password3/student
+4/Adham/mail4/password4/student
+5/Beshoy/mail5/password5/student

@@ -66,6 +66,7 @@ public class Main {
                 LoggedOnUserData = Person.Login(FileHandling.people);
                 break;
             case "2":
+                System.out.println("\t\t==========================================  Welcome to Register Page ==========================================\n\n");
                 Student.register(FileHandling.people.size());
                 FileHandling.people.add(Student.newerCredentials.getLast());
                 LoggedOnUserData.add(String.valueOf(Student.newerCredentials.getLast().ID));

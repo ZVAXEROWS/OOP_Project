@@ -32,24 +32,12 @@ public class ExamResult implements Serializable {
         return examName;
     }
 
-    public void setExamName(String examName) {
-        this.examName = examName;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public String getGrade() {
         return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public String getStatus() {
@@ -60,14 +48,13 @@ public class ExamResult implements Serializable {
         this.status = status;
     }
 
-
     public void setExamName(int index) {
         examName = AdminMakeQuestions.createdExam.get(index).examTitle;
     }
 
     public void setExamID(int index) {
 
-        examID = index;  // this is wrong
+        examID = AdminMakeQuestions.createdExam.get(index).examID;  // this is wrong
     }
 
     public void calculateGrade() {

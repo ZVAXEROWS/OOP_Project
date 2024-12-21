@@ -1,9 +1,7 @@
 import QuestionsPackage.AdminMakeQuestions;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Student <T> extends Person {
 
@@ -20,7 +18,7 @@ public class Student <T> extends Person {
         upComingResult.displayStudentResults();
     }
 
-    public void takeExam( Result result){
+    public void takeExam(Result result){
 
         if(!AdminMakeQuestions.createdExam.isEmpty())
         {
@@ -31,12 +29,16 @@ public class Student <T> extends Person {
 
             System.out.print("Enter the number of Exam to take: ");
             int examNumber = reader.nextInt();
-            if(examNumber >= 0 && examNumber < AdminMakeQuestions.createdExam.size())
-            {
+            try {
+
+                if (examNumber >= 0 && examNumber < AdminMakeQuestions.createdExam.size()) {
                     exam = new Solve_Exam();
                     Solve_Exam.SolveExam(examNumber, result);
-            }
-            else
+                } else {
+                    System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n\n");
+                    takeExam(result);
+                }
+            } catch (InputMismatchException e)
             {
                 System.out.println("\t\txxxxxxxxxxxx Invalid option  xxxxxxxxxxxx\n");
                 takeExam(result);
@@ -50,13 +52,20 @@ public class Student <T> extends Person {
 
     static public void register(int LastIdIndex) throws IOException {
         Scanner reader = new Scanner(System.in);
-        System.out.println("\t\t==========================================  Welcome to Register Page ==========================================\n\n");
         System.out.print("Name: ");
         String name = reader.nextLine();
         System.out.print("Email: ");
         String email = reader.nextLine();
         System.out.print("Password: ");
         String password = reader.nextLine();
+        if(name.isBlank()|| email.isBlank() || password.isBlank())
+        {
+            System.out.println("\nxxxxxxxxxxxxxxxxxxxxxx invalid Credentials xxxxxxxxxxxxxxxxxxxxxx\n\n");
+            register(LastIdIndex);
+        } else if (email.equals("99")  || password.equals("99")) {
+            System.out.println("\nxxxxxxxxxxxxxxxxxxxxxx Mail or Password Cannot be 99 xxxxxxxxxxxxxxxxxxxxxx\n\n");
+            register(LastIdIndex);
+        }
         newerCredentials.add(new Student(LastIdIndex,name,email,password,"student"));
     }
 }

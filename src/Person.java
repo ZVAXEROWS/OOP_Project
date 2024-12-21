@@ -24,15 +24,21 @@ public class Person{
         boolean userFound = false;
         Scanner reader = new Scanner(System.in);
         List<String> values = new ArrayList<>();
-
+        System.out.println("Enter (99) to exit the program");
         do {
             String email;
             String password;
             System.out.print("Enter your Email: ");
             email = reader.nextLine();
+            if(email.equals("99")){
+                System.exit(0);
+            }
             System.out.print("Enter your password: ");
             password = reader.nextLine();
-
+            if(password.equals("99"))
+            {
+                System.exit(0);
+            }
             for (Person person : people) {
                 if (email.equals(person.Email) && password.equals(person.getPassword())) {
                     values.add(String.valueOf(person.ID));
@@ -44,11 +50,13 @@ public class Person{
                     break;
                 }
             }
+            if(!userFound)
+            {
+                System.out.print("\nxxxxxxxxxxx User not found xxxxxxxxxxx\n");
+            }
         }
         while(!userFound);
 
         return values;
     }
 }
-
-

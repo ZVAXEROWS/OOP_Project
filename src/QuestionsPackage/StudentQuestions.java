@@ -32,10 +32,12 @@ public class StudentQuestions extends Questions {
 
         System.out.println("Enter your Answer: ");
         Scanner input = new Scanner(System.in);
-        int answer = input.nextInt();
+        int answer = limits(1,options.length);
         System.out.println("-------------------------------------------------------\n\n\n");
 
         if (answer == questions.getTheCorrectOne()){ studentMarks += questions.getMark(); }
 
     }
+
+
 }
